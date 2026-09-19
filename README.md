@@ -1,8 +1,8 @@
-# Opsora SRE — Site Reliability Engineering Operations Platform
+# Opsora SaaS — Multi-Tenant Site Reliability Engineering Cloud Platform
 
-> **A mission-critical, open-source Laravel 11 + Flutter ecosystem** for 24/7 engineering operations teams to execute verified shift checklists, record status updates with immutable audit trails, manage two-way handovers, war rooms, and real-time operational telemetry.
+> **An enterprise-grade, multi-tenant SRE operations platform and Flutter mobile companion** featuring organizational tenancy isolation, super admin platform control plane, real-time shift checklists, immutable SIEM audit ledgers, incident war rooms, and continuous telemetry.
 
-[![Production Live](https://img.shields.io/badge/Live%20Demo-opsora--sre.onrender.com-1B6B3A?style=flat&logo=render)](https://opsora-sre.onrender.com)
+[![Production Live](https://img.shields.io/badge/Live%20SaaS-opsora--sre.onrender.com-1B6B3A?style=flat&logo=render)](https://opsora-sre.onrender.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-F5C518.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![Backend Tests](https://img.shields.io/badge/backend%20tests-173%20passing%20(827%20assertions)-brightgreen)](tests/)
@@ -10,62 +10,68 @@
 [![PHP](https://img.shields.io/badge/PHP-8.2+-blue?logo=php)](https://php.net)
 [![Laravel](https://img.shields.io/badge/Laravel-11.x-red?logo=laravel)](https://laravel.com)
 [![Flutter](https://img.shields.io/badge/Flutter-3.24+-02569B?logo=flutter)](npontu_sre_mobile/)
-[![Tailwind](https://img.shields.io/badge/Tailwind-3.x-38B2AC?logo=tailwind-css)](https://tailwindcss.com)
+[![Architecture](https://img.shields.io/badge/Architecture-Multi--Tenant%20SaaS-7C3AED)](docs/saas/)
+[![Database](https://img.shields.io/badge/Database-PostgreSQL%20%7C%20MySQL-336791?logo=postgresql)](render.yaml)
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker&logoColor=white)](#-60-second-quickstart-docker)
 
-🌐 **Live Demo & Real-Time Status**:
+🌐 **Live SaaS Endpoints & Console**:
 - **Web Console**: [https://opsora-sre.onrender.com](https://opsora-sre.onrender.com)
-- **Real-Time Telemetry & Status**: [https://opsora-sre.onrender.com/health](https://opsora-sre.onrender.com/health)
-- **Documentation & API Specs**: [https://opsora-sre.onrender.com/docs](https://opsora-sre.onrender.com/docs)
-- **API Base**: `https://opsora-sre.onrender.com/api/v1`
+- **Platform Control Plane (Super Admin)**: [https://opsora-sre.onrender.com/admin/platform](https://opsora-sre.onrender.com/admin/platform)
+- **Tenant Onboarding & Registration**: [https://opsora-sre.onrender.com/register](https://opsora-sre.onrender.com/register)
+- **Real-Time Telemetry & Status HUD**: [https://opsora-sre.onrender.com/health](https://opsora-sre.onrender.com/health)
+- **OpenAPI 3.0 Specs & Docs**: [https://opsora-sre.onrender.com/docs](https://opsora-sre.onrender.com/docs)
+- **REST API v1 Gateway**: `https://opsora-sre.onrender.com/api/v1`
 
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/mhiskall282/opsora-saas)
 
-> 🌟 **Star this repository** if you find Opsora SRE useful for your engineering and operations teams! It helps the project grow and reach more SREs worldwide.
+> 🌟 **Star this repository** if you find Opsora SaaS valuable for your engineering and operations teams! It helps the platform grow and reach more SREs worldwide.
 
 ---
 
 ### ⚡ 60-Second Quickstart (Docker)
 
-Get Opsora SRE up and running locally with one command:
+Get Opsora SaaS running locally with all services (Web, PostgreSQL, Worker) in one command:
 
 ```bash
-# Clone the repository
+# 1. Clone the SaaS repository
 git clone https://github.com/mhiskall282/opsora-saas.git
 cd opsora-saas
 
-# Copy environment template
+# 2. Copy environment template
 cp .env.example .env
 
-# Build and start all services (Web, PostgreSQL, Worker)
+# 3. Build and launch containers
 docker compose up -d
 
-# Run database migrations and seeds
+# 4. Run multi-tenant migrations and baseline seeds
 docker compose exec app php artisan migrate --seed
 ```
-Open [http://localhost:8000](http://localhost:8000) in your browser!
+
+Open [http://localhost:8000](http://localhost:8000) to access the landing page and onboarding portal!
 
 ---
 
 ### 📱 Download Android APK & Mobile Companion
 
-- **Android APK (ARM64)**: Pre-compiled binaries available in [GitHub Releases](https://github.com/mhiskall282/opsora-saas/releases) or build directly with:
+Pre-compiled release APKs and mobile companion artifacts for on-call engineers:
+
+- **Android APK (ARM64)**: Download pre-built APKs directly from [GitHub Releases](https://github.com/mhiskall282/opsora-saas/releases) or build locally:
   ```bash
   cd npontu_sre_mobile
   flutter build apk --split-per-abi --dart-define=API_BASE_URL=https://opsora-sre.onrender.com/api/v1
   ```
-- **App Store & Google Play Publishing**: Step-by-step guides available in [Store Publishing Guide](docs/deployment/store-publishing-guide.md).
+- **App Store & Google Play Publishing**: Review the step-by-step submission checklist in the [Store Publishing Guide](docs/deployment/store-publishing-guide.md).
 
 ---
 
-## 🌐 The Two Applications: Web Cockpit & Mobile Companion
+## 🌐 Dual-Application Ecosystem: Web Cockpit & Mobile Companion
 
-Opsora SRE operates as a unified dual-application ecosystem designed to eliminate operational blind spots across desktop mission control and on-call field operations.
+Opsora SaaS operates as a unified dual-application ecosystem designed to eliminate operational blind spots across desktop mission control and on-call field operations.
 
 ```mermaid
 graph TB
     subgraph Clients ["Two Unified Client Applications"]
-        WebApp["🖥️ Opsora SRE Web & Control Plane<br/>(Laravel 11/12 LTS + Livewire 3 + Blade + Tailwind v3)"]
+        WebApp["🖥️ Opsora SaaS Web & Control Plane<br/>(Laravel 11/12 LTS + Livewire 3 + Blade + Tailwind v3)"]
         MobileApp["📱 Opsora SRE Mobile Companion<br/>(Flutter 3.24+ / Dart 3.5+ for Android, iOS, Windows)"]
     end
 
@@ -75,7 +81,8 @@ graph TB
     end
 
     subgraph CoreEngine ["Opsora SaaS Core Engine"]
-        MultiTenant["Multi-Tenant Isolation (Workspaces & Orgs)"]
+        MultiTenant["Multi-Tenant Isolation (Workspaces & Organizations)"]
+        ControlPlane["Platform Control Plane (Tenant Suspension & Vetting)"]
         ShiftBoard["24/7 Shift Checklists & Handshake Engine"]
         WarRooms["Incident War Rooms & Real-Time Comms"]
         AuditLedger["Immutable SIEM Audit Trail (Append-Only)"]
@@ -83,7 +90,7 @@ graph TB
     end
 
     subgraph DataStorage ["Persistent Data Layer"]
-        MySQL[(PostgreSQL / MySQL 8.0+ InnoDB)]
+        DB[(Managed PostgreSQL / MySQL 8.0+)]
         Storage[(S3 / DigitalOcean Spaces / Ephemeral Local)]
     end
 
@@ -94,574 +101,178 @@ graph TB
     CoreEngine --> DataStorage
 ```
 
-### 1. Opsora SRE Web Cockpit & Platform Control Plane
-*Desktop Mission Control & Multi-Tenant Administration*
+---
 
-- **Path**: Root repository (`app/`, `resources/views/`, `routes/web.php`)
-- **Stack**: Laravel 11/12 LTS, Livewire 3, Blade, Tailwind CSS v3, Chart.js, PostgreSQL / MySQL
-- **Primary Roles**: SRE Leads, Incident Commanders, Operations Managers, and Platform Administrators
-- **Key Modules**:
-  - **Administrative Control Plane**: Self-service organization registration, risk scoring approval queue, emergency maintenance lockout (`EnsurePlatformNotUnderMaintenance`), platform announcements banner, feature flags, and tenant support impersonation mode.
-  - **24/7 Shift Operations Board**: Real-time checklists with inline status toggling (`Done` / `Pending`), mandatory blocker remarks, incident ticket linking (`INC-1042`), and engineer task delegation.
-  - **Two-Way Custody Handover Protocol**: 4-phase custody handshake between outgoing lead and oncoming lead with cryptographic timestamping and email notifications.
-  - **Operational Communications & War Rooms**: Shift channels (`#general-shift`), 1-on-1 direct chat, Base64 PDF/image attachments, `@mention` alerts, and 1-click HMAC SHA256 email reply bridge.
-  - **Standalone System Status Dashboard (`/health`)**: Dedicated zero-sidebar status page providing real-time subsystem telemetry (DB, cache, memory, mail), 24h heartbeat graphs, 7-day latency trends, and raw `{ } JSON API` probes.
-  - **Automated SRE Reports Scheduler**: Automated daily, weekly, and monthly digests with SLA metrics dispatched via `php artisan reports:send-automated`.
-- **Local Run**:
-  ```bash
-  php artisan serve --port=8000
-  npm run dev
-  ```
-  *Access in browser*: `http://localhost:8000`
+## 🏢 Enterprise Multi-Tenant SaaS Architecture
 
-### 2. Opsora SRE Mobile Companion App
-*On-Call Field Response & Multi-Tenant Pocket Operations*
+Opsora SaaS is built from the ground up for multi-tenancy, providing safe isolation between customer organizations while enabling rapid self-service provisioning.
 
-- **Path**: `npontu_sre_mobile/` (Dedicated Flutter 3.24+ project)
-- **Stack**: Flutter 3.24+ (Dart 3.5+), Riverpod 2.6+, Dio 5.11+, FlutterSecureStorage, GoRouter
-- **Supported Platforms**: Android (Phones & Tablets), iOS (iPhone & iPad), Windows Native Desktop
-- **Primary Roles**: On-call SREs, field engineers, roaming leads, and standby responders
-- **Key Modules**:
-  - **Hardware-Backed KeyStore Security**: Encrypted storage of Sanctum Bearer tokens and active workspace credentials using Android AES-GCM KeyStore and iOS Keychain.
-  - **Multi-Tenant Workspace Switcher**: Switch between personal, corporate, and client workspaces with automatic `X-Workspace-Id` header injection.
-  - **Shift Checklists & Inline Updates**: Instant checklist updates and blocker remark logging from the mobile device.
-  - **Two-Way Shift Handover on Mobile**: Review briefings, sign off custody, and accept oncoming shifts on mobile.
-  - **Real-Time 3-Second Telemetry HUD**: Live stream of database latency, memory footprint, cache roundtrip, and queue health.
-  - **Incident War Rooms on Mobile**: Read and send operational messages, preview PDF attachments, and track unread notification badges.
-  - **Offline Caching & Biometrics**: Local cache for fast zero-latency launch even during network disconnects.
-- **Local Run**:
-  ```bash
-  cd npontu_sre_mobile
-  flutter run -d windows         # Native Windows Desktop (fastest)
-  flutter run -d emulator-5554    # Android Emulator (bridges via 10.0.2.2:8000)
-  flutter run -d chrome           # Chrome Web
-  ```
-- **Pre-Built APK**: Pre-compiled universal release APKs are automatically generated on every commit in GitHub Actions.
+```mermaid
+erDiagram
+    ORGANIZATION ||--o{ WORKSPACE : contains
+    ORGANIZATION ||--o{ ORGANIZATION_MEMBERSHIP : has
+    ORGANIZATION ||--o{ ORGANIZATION_APPLICATION : reviews
+    USER ||--o{ ORGANIZATION_MEMBERSHIP : belongs_to
+    USER ||--o{ WORKSPACE_MEMBERSHIP : belongs_to
+    WORKSPACE ||--o{ WORKSPACE_MEMBERSHIP : has
+    WORKSPACE ||--o{ ACTIVITY : owns
+    WORKSPACE ||--o{ SHIFT_HANDOVER : records
+    WORKSPACE ||--o{ CONVERSATION : scopes
+    USER ||--o{ AUDIT_LOG : mutates
+```
+
+### 1. Tenancy Isolation & Query Scoping
+- **Tenant Scope Enforcement**: All operational models (`Activity`, `ShiftHandover`, `Conversation`, `OperationalNotification`) apply the `TenantScope` and utilize the `BelongsToWorkspace` trait.
+- **Header-Driven API Ingress**: API requests resolve tenant boundaries via the `X-Workspace-Id` HTTP header. The `ResolveTenantContext` middleware verifies user membership before fulfilling requests.
+- **Session-Driven Web Hub**: The Web Cockpit persists active workspace selection in the session (`active_workspace_id`), strictly validating that the authenticated user holds an active membership.
+- **Personal & Organizational Workspaces**: Users can manage personal workspaces for individual tracking or join enterprise organizations with company codes (e.g. `NPT-OPS-01`).
+
+### 2. Platform Administrative Control Plane (`/admin/platform`)
+Super Administrators enjoy cross-tenant operational governance:
+- **Organization Vetting Queue**: Automated risk scoring evaluates self-service applications. Low-risk applications are auto-approved; customer-hosted and enterprise applications enter a manual vetting queue.
+- **Organization Suspension & Reactivation**: 1-click tenant lockout revoking all active Sanctum tokens instantly upon suspension.
+- **Global Emergency Maintenance Mode**: Platform-wide lockdown via `EnsurePlatformNotUnderMaintenance` with bypass exceptions for Super Admins.
+- **Global Broadcast Announcements**: High-visibility banner notifications dispatachable across all tenant workspaces.
+- **Feature Flags Engine**: Dynamic capability flags togglable globally or per-organization.
+- **Support Impersonation Mode**: Secure audit-logged impersonation protocol enabling platform operators to resolve customer issues within tenant context.
 
 ---
 
-## What This Application Does
+## 🖥️ Feature Breakdown: Web Platform & Control Plane
 
-Support teams managing live production systems need a lightweight, auditable tool to track what was checked, what was resolved, and what must be handed over to the next shift. This application provides:
-
-| Feature | Description |
-|---|---|
-| **Public SRE Landing Page** | High-impact overview of Opsora's SRE platform (`GET /`): capability matrix, 4-step handover lifecycle, live telemetry probes, and 1-click test roles |
-| **High-Level SRE Docs Portal** | High-level platform guide (`GET /docs`): 6 permanent chapters (`#quickstart`, `#architecture`, `#handover-flow`, `#mobile-setup`, `#governance`, `#faq`) for technical, non-technical, and executive stakeholders |
-| **Mobile SRE Companion App** | Flutter 3.24+ mobile client for Android/iOS/Windows: offline-first local cache, zero-latency startup, active 3s chat sync, and animated onboarding walkthrough |
-| **SRE Profile Inspection Modals** | Clickable operator cards across web & mobile displaying SRE seniority tiers (`L1` to `L5`), department/pod, designation, contact info, and active clearances |
-| **Strict Role-Based UI Pruning** | Zero disabled clutter: buttons and navigation links a user lacks clearance for are completely removed from the DOM/screen |
-| **Squeezed Collapsible Sidebar** | Sleek collapsible submenus (Operations, Comms, Supervisory, Docs) with subtle uptime indicator in footer |
-| **Daily Shift Board** | Live checklist of today's activities — pending items glow amber, done items fade green, with task delegation |
-| **Two-Way Shift Handshake** | Outgoing lead formal sign-off paired with incoming lead sign-on and verification acceptance remarks |
-| **SRE Operations Comms** | Live team messaging hub: 1-on-1 direct chat, team channels (`#general-shift`), war rooms, Base64 PDF/image attachments, and `@mention` email alerts |
-| **1-Click Email Reply Bridge** | Cryptographically signed HMAC SHA256 reply tokens allowing engineers to post to shift channels directly via email or 1-click web composer (`POST /api/webhooks/inbound-email`) |
-| **Automated SRE Reports** | Scheduled automated daily, weekly, and monthly email digests (`php artisan reports:send-automated`) with SLA metrics and shift health KPIs |
-| **System Health & Telemetry** | Multi-service probes (DB, cache, memory, mail), live 3s HUD streaming, 24h heartbeat, and public JSON API (`GET /health`) |
-| **Play Store & App Store Compliance** | Full legal disclosures, mobile permissions audit, and Apple Guideline 5.1.1(v) account deletion request workflow |
-| **Granular Privileges & Grades** | 9 configurable access checkboxes per user and L1–L5 SRE operational tiers |
-| **Branded Error Pages & Security** | Custom SRE 419 (Session Expired), 404 (Route Not Found), 403 (Forbidden), 500 (Runtime Exception), and 503 (Maintenance) with zero mobile overflow, Livewire 419 interceptor, and redesigned operator sign-in with 1-click test credentials |
-| **Status Updates & Escalations** | Mark activities Done or Pending with a remark, flag incident tickets (`INC-1042`), and trigger alert pings |
-| **Immutable Audit Trail** | Every state mutation is logged with actor identity, IP address, and before/after JSON diff values |
-| **Multi-Domain SRE Reports** | Date-range checkoff history, shift handover compliance KPIs, and operator work timelines & duty hours |
-| **PDF Print / CSV Export** | Print complete reports for compliance documentation or stream to CSV for analysis |
-| **Email Reports** | Send customised activity reports to selected team members via email |
-| **Account Settings** | All users can update their profile and change their password |
-| **Admin Console** | Admins manage users (CRUD), assign granular privileges, and define the activity checklist |
-
----
-
-## Tech Stack
-
-| Layer | Technology | Version | Why |
-|---|---|---|---|
-| Framework | Laravel | 11.x (LTS) | Mature, well-tested ecosystem; aligns with PHP 8.2 requirement |
-| Language | PHP | 8.2+ | Typed properties, enums, readonly where appropriate |
-| Database | SQLite (dev) / MySQL (prod) | 8.0+ | InnoDB with FK constraints; SQLite for zero-config local dev |
-| Frontend | Blade + Livewire | Livewire 3.x | No JS build complexity; reactive wire:poll for live shift view |
-| CSS | Tailwind CSS | 3.x | Utility-first; Npontu brand tokens configured |
-| Tests | Pest | 2.x | Expressive, Laravel-native; more readable than PHPUnit verbosity |
-| Linter | Laravel Pint | latest | Enforces PSR-12 automatically |
-| Mail | Laravel Mailable | — | Markdown email templates with custom subject and body |
-| Charts | Chart.js (CDN) | 4.x | Doughnut + bar charts for report visualisations |
-
----
-
-## Requirements
-
-- PHP 8.2+
-- Composer 2.x
-- Node.js 18+ & npm
-- SQLite (default, zero config) **or** MySQL 8.0+
-
----
-
-## Quick Start (Local Development)
-
-### 1. Clone the repository
-```bash
-git clone https://github.com/mhiskall282/npontu-technologies-sre.git
-cd npontu-technologies-sre
-```
-
-### 2. Install dependencies
-```bash
-composer install
-npm install && npm run build
-```
-
-### 3. Configure environment
-```bash
-cp .env.example .env
-php artisan key:generate
-```
-
-The default `.env.example` uses **SQLite** — no database server needed:
-```env
-DB_CONNECTION=sqlite
-DB_DATABASE=/absolute/path/to/database/database.sqlite
-```
-
-For MySQL, update:
-```env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=npontu_tracker
-DB_USERNAME=your_username
-DB_PASSWORD=your_password
-```
-
-### 4. Run migrations and seed
-```bash
-php artisan migrate
-php artisan db:seed
-```
-
-### 5. Serve the application
-```bash
-php artisan serve
-```
-
-Open **[http://localhost:8000](http://localhost:8000)**
-
-## Role-Based Access Governance
-
-Opsora SRE enforces role-based access control across three primary operational tiers:
-
-| Role | System Scope | Key Capabilities |
+| Module | Route / Component | Description |
 |---|---|---|
-| **Administrator** | `admin` | Full user provisioning, activity checklist management, tenant governance & SIEM audit logs |
-| **Team Lead** | `lead` | Shift supervision, activity management, incident flagging & two-way digital handover sign-offs |
-| **Support Agent** | `agent` | Routine activity checkoffs, mandatory resolution remarks & on-call shift operations |
-
-### Initial Account Provisioning
-- **Self-Service / Onboarding**: Register an initial administrator and organization via `/register`.
-- **Administrative Console**: Once logged in, administrators manage team members and permissions at `/admin/users`.
-- **CLI Provisioning**: Administrators can also be provisioned or promoted via Laravel Artisan (`php artisan tinker`).
-
-## Running Tests
-
-### Backend Pest Test Suite (Laravel 11)
-
-```bash
-# Full backend test suite (96 tests, 491 assertions)
-php artisan test
-# or
-./vendor/bin/pest
-
-# With verbose execution details
-./vendor/bin/pest --verbose
-
-# Run a specific test suite
-./vendor/bin/pest tests/Feature/Api/ActivityApiTest.php
-./vendor/bin/pest tests/Feature/Api/AuthApiTest.php
-./vendor/bin/pest tests/Feature/DocsPortalTest.php
-./vendor/bin/pest tests/Feature/OperationalCommunicationsAndPrivilegesTest.php
-```
-
-Tests use an **in-memory SQLite** database (configured in `phpunit.xml`) — zero external DB dependencies.
-
-**Backend test coverage areas (96 tests / 491 assertions):**
-- **Mobile REST API v1**: Complete test coverage for authentication, token revocation, activities CRUD, handovers two-way signoff, war rooms, messaging, system health probes, reports, and security audit trail.
-- **Public SRE Landing Page**: Unauthenticated visitor showcase, 6 capability pillars, architecture walkthrough, pre-seeded test roles, authenticated SRE cockpit CTA
-- **High-Level SRE Documentation Portal**: 5 permanent chapters (`#quickstart`, `#architecture`, `#handover-flow`, `#governance`, `#faq`), verification commands, and interactive FAQ accordion
-- **Authentication & Security**: Login success, failure validation alerts, logout, redirect, session expiration banners
-- **Custom Branded Error Handling**: 419 (Session Expired), 404 (Route Not Found), 403 (Forbidden), 500 (Runtime Error), 503 (Maintenance Mode) with zero mobile viewport overflow
-- **Livewire 419 Interceptor**: Hook intercepting expired session tokens and redirecting cleanly to `/login?expired=1` without raw modal popups
-- **Activity CRUD**: Create, read, update, soft-delete, with task assignment and delegation
-- **Status Update Flow**: Status changes (Done/Pending) with mandatory remarks, incident escalation flags, and domain/audit logs
-- **Operational Communications**: Direct 1-on-1 chats, team shift channels, incident war rooms, `@name` & `@all` email receipts, and Base64 PDF/image blob attachments
-- **Email Reply Bridge & Inbound Webhook**: Cryptographically signed HMAC SHA256 tokens, 1-click web reply composer, and inbound email webhook parser (`POST /api/webhooks/inbound-email`)
-- **Automated SRE Reports Scheduler**: `php artisan reports:send-automated {period=daily|weekly|monthly}` command validation and automated email dispatch
-- **Shift Handover Handshake**: Outgoing briefing sign-off and incoming lead verification sign-on
-- **Multi-Domain Reporting**: Custom date-range activity checks, handover audit reports, and operator work timelines & duty hours
-- **System Health Diagnostics**: Live telemetry streaming, subsystem probes, and availability SLA metrics
-- **Compliance Policies**: SLA 99.98% commitment, SOC2/SIEM audit policy, terms of service, and privacy standards
+| **Public Landing Page** | `GET /` | High-impact overview of the SaaS platform: capability matrix, 4-step handover lifecycle, live telemetry, and direct onboarding |
+| **SaaS Docs Portal** | `GET /docs` | Complete documentation: `#quickstart`, `#architecture`, `#handover-flow`, `#mobile-setup`, `#governance`, `#faq` |
+| **Tenant Onboarding Hub** | `GET /workspaces` | Workspace switcher, personal workspace provisioning, and join organization via company code |
+| **Self-Service Registration** | `GET /register` & `/organizations/apply` | Automated onboarding pipeline with domain validation, tier selection, and instant workspace setup |
+| **Control Plane Dashboard** | `GET /admin/platform` | Cross-tenant metrics, tenant status list, and platform-wide health monitoring |
+| **Application Review Queue** | `GET /admin/platform/organizations/applications` | Review and approve pending organization registration requests |
+| **Daily Shift Board** | `GET /activities/daily` | Real-time checklists with inline status updates, mandatory remarks, incident ticket linking, and task delegation |
+| **Two-Way Shift Handshake** | `GET /handovers` | 4-phase formal sign-off between outgoing supervisor and incoming lead |
+| **Operations Comms & War Rooms** | `GET /messages` | Team channels (`#general-shift`), 1-on-1 direct chat, Base64 PDF/image attachments, `@mention` alerts, and 1-click email reply bridge |
+| **Standalone Status Dashboard** | `GET /health` | Zero-sidebar public status page with live UTC clock, subsystem telemetry (DB, cache, memory, mail), and JSON API probe |
+| **Automated SRE Reports** | `php artisan reports:send-automated` | Scheduled automated daily, weekly, and monthly digests with SLA metrics and shift health KPIs |
+| **SIEM Audit Ledger** | `GET /admin/audit-logs` | Immutable append-only audit trail logging actor identity, IP address, user-agent, and before/after JSON diffs |
 
 ---
 
-### Mobile Flutter Test Suite (npontu_sre_mobile)
+## 📱 Cross-Platform Flutter Mobile Companion
 
-```bash
-cd npontu_sre_mobile
+A native Flutter client (`npontu_sre_mobile`) built for on-call engineers, roaming leads, and standby responders:
 
-# Run all unit and widget tests (22 passing tests)
-flutter test
+### Tech Stack & Security
+- **Framework**: Flutter 3.24+ (Dart 3.5+)
+- **State Management**: Riverpod (`flutter_riverpod: ^2.6.1`) with feature-first modular architecture
+- **Networking**: Dio (`dio: ^5.11.1`) with automatic Bearer token injection and `X-Workspace-Id` resolution
+- **Navigation**: Declarative routing via GoRouter (`go_router: ^18.0.1`) with authentication and workspace guards
+- **Hardware-Backed KeyStore**: Sanctum API tokens encrypted in Android KeyStore (AES-GCM) and iOS Keychain (`kSecAttrAccessibleAfterFirstUnlock`)
 
-# Run static analysis (0 warnings)
-flutter analyze
-
-# Verify code formatting
-dart format --output=none --set-exit-if-changed .
-```
-
-**Mobile test coverage areas (22 unit & widget tests):**
-- **Model JSON Deserialization**: `UserModel`, `ActivityModel`, `ShiftHandoverModel`, `ConversationModel`, `MessageModel`, `SystemHealthModel`, `AuditLogModel`, and `NotificationModel`.
-- **Notification & Badge Counting**: Unit tests validating unread count badges, read transitions, and state copyWith.
-- **UI Components & Badges**: Status badges (`DONE`, `PENDING`, `ACKNOWLEDGED`), Priority badges (`CRITICAL`, `HIGH`, `MEDIUM`, `LOW`), Skeleton loaders, and Empty/Error state widgets.
-- **Screen Widget Tests**: `LoginScreen` rendering, input validation, authenticated session state transitions, and legal footer links.
-- **Production Render Probes**: Connectivity and health probe validation against live endpoints.
-
----
-
-## Local PC Testing & Android Emulator Guide
-
-### 1. Testing the Web Backend on PC
-
-```bash
-# 1. Start local development server
-php artisan serve --host=0.0.0.0 --port=8000
-
-# 2. In a separate terminal, compile assets with hot reload
-npm run dev
-
-# 3. Access in browser: http://localhost:8000
-# Sign in with your administrator or operator credentials created during setup / registration
-```
-
-### 2. Testing the Mobile App on PC (3 Options)
-
-#### Option A: Native Windows Desktop (Fastest — Zero Emulator Required)
-```bash
-cd npontu_sre_mobile
-flutter run -d windows
-```
-*Compiles directly into a Windows native executable window on your PC. Connects to `http://localhost:8000/api/v1`.*
-
-#### Option B: Android Studio Emulator (AVD Virtual Device)
-1. In Android Studio, open **Virtual Device Manager** (`Tools` &rarr; `Device Manager`).
-2. Create a virtual device: **Pixel 8**, system image: **API 34 (UpsideDownCake)** x86_64 with Google Play.
-3. Start the emulator via GUI or command line:
-   ```bash
-   emulator -avd Pixel_8_API_34
-   ```
-4. Run the Flutter app targeting the emulator:
-   ```bash
-   cd npontu_sre_mobile
-   flutter run -d emulator-5554
-   ```
-   > 💡 **Networking Note**: Inside the Android emulator, `http://localhost:8000` refers to the Android device itself. Android provides a loopback alias: **`http://10.0.2.2:8000/api/v1`** maps directly to your PC's `127.0.0.1:8000`.
-
-#### Option C: Google Chrome Web Browser
-```bash
-cd npontu_sre_mobile
-flutter run -d chrome
-```
-
----
-
-## Legal, Privacy Policy & App Store Compliance
-
-The platform and companion mobile apps comply with:
-- **Google Play User Data Policy**: Explicit disclosure of permissions, zero advertising SDKs, and transparent offline cache handling.
-- **Apple App Store Review Guideline 5.1.1(v)**: Full account deletion and data extraction request support.
-- **Ghana Data Protection Act 2012 (Act 843)** & **ISO 27001 / PCI-DSS v4.0**:
-  - Web Privacy Policy: Accessible at [`/privacy-policy`](https://opsora-sre.onrender.com/privacy-policy).
-  - In-App Mobile Privacy Sheet: Accessible via `Settings` &rarr; `Privacy Policy & Data Handling` or on `LoginScreen`.
-  - Account Deletion Requests: Submit in-app via *Request Account Deletion* or email to Data Protection Officer at `dpo@npontu.com` (48hr acknowledgment, 30-day SLA).
-  - Statutory 7-year cold-storage retention for immutable audit logs.
-
----
-
-## Automated SRE Reports Command
-
-The platform ships an automated multi-cadence reporting engine registered in `routes/console.php`:
-
-```bash
-# Send daily shift digest (dispatches every night at 23:55 GMT)
-php artisan reports:send-automated daily
-
-# Send weekly executive SRE report (dispatches every Sunday at 23:55 GMT)
-php artisan reports:send-automated weekly
-
-# Send monthly SRE operational review (dispatches last day of month at 23:55 GMT)
-php artisan reports:send-automated monthly
-
-# Send report to a specific recipient address
-php artisan reports:send-automated daily --to=lead@your-organization.com
-```
-
----
-
-## Code Style
-
-```bash
-# Auto-fix all PSR-12 violations
-./vendor/bin/pint
-
-# Dry-run (check only)
-./vendor/bin/pint --test
-```
-
-**Run Pint before every commit** — enforced in AGENTS.md.
-
----
-
-## Project Structure
-
-```
-.
-├── app/
-│   ├── Actions/Activities/         # Single-responsibility business logic classes
-│   │   ├── CreateActivityAction.php
-│   │   ├── UpdateActivityAction.php
-│   │   ├── UpdateActivityStatusAction.php
-│   │   └── DeleteActivityAction.php
-│   ├── Console/Commands/           # Artisan commands
-│   │   └── SendAutomatedReportsCommand.php # Scheduled daily/weekly/monthly reports
-│   ├── Http/
-│   │   ├── Controllers/            # Thin HTTP glue (validate → delegate → respond)
-│   │   │   ├── ActivityController.php
-│   │   │   ├── DashboardController.php
-│   │   │   ├── DocsController.php      # High-level documentation portal
-│   │   │   ├── EmailReplyController.php # 1-Click web replies & inbound webhook
-│   │   │   ├── HealthController.php    # Interactive telemetry & health probes
-│   │   │   ├── LandingController.php   # Public SRE landing page
-│   │   │   ├── MonitoringController.php # SRE operational oversight & audit log stream
-│   │   │   ├── PolicyController.php    # SLA, SIEM, and governance policies
-│   │   │   ├── ReportController.php    # Date-range queries, CSV & print views
-│   │   │   ├── SettingsController.php  # User profile & credential settings
-│   │   │   └── Admin/
-│   │   │       ├── ActivityController.php
-│   │   │       └── UserController.php  # Granular privileges & technical grades
-│   │   ├── Middleware/
-│   │   │   ├── EnsureRole.php      # Role-based route guard
-│   │   │   └── SecureHeaders.php   # Security HTTP headers
-│   │   └── Requests/               # Form Requests (validation + authorization)
-│   ├── Livewire/
-│   │   ├── DailyActivityBoard.php  # Shift handover real-time board
-│   │   ├── ActivityStatusUpdater.php # Inline status toggle component
-│   │   └── OperationalChat.php     # Team channels, war rooms, Base64 attachments
-│   ├── Mail/
-│   │   ├── ActivityReportMail.php  # Mailable for manual activity reports
-│   │   ├── AutomatedDigestReportMail.php # Scheduled daily/weekly/monthly digests
-│   │   └── MessageMentionMail.php  # @mention receipts & email reply bridge
-│   ├── Models/
-│   │   ├── Activity.php            # Core operational check entity
-│   │   ├── ActivityLog.php         # Append-only status checkoff log
-│   │   ├── AuditLog.php            # Security/compliance change log
-│   │   ├── Conversation.php        # Chat channels & war rooms
-│   │   ├── Message.php             # Operational messages & Base64 attachments
-│   │   ├── ShiftHandover.php       # Two-way shift handover agreements
-│   │   └── User.php                # Auth user with role & privilege helpers
-│   ├── Policies/
-│   │   ├── ActivityPolicy.php      # Who can create/update/delete activities
-│   │   └── UserPolicy.php          # Who can manage users
-│   ├── Providers/
-│   │   └── AppServiceProvider.php  # Layout component aliases & HTTPS enforcement
-│   └── Services/
-│       ├── AuditService.php        # Write immutable audit log entries
-│       ├── EmailReplyTokenService.php # Cryptographic HMAC reply tokens
-│       ├── ReportingService.php    # Date-range, handover & timeline queries
-│       └── SystemHealthService.php # Multi-probe telemetry & health diagnostics
-├── database/
-│   ├── factories/                  # Model factories for seeding & testing
-│   ├── migrations/                 # Versioned schema (all have down())
-│   └── seeders/                    # Default data (users, sample activities)
-├── docs/
-│   ├── requirements.md             # Functional requirements + grading rubric
-│   ├── architecture.md             # ERD, module boundaries, deployment diagram
-│   ├── context.md                  # Brand guidelines, business context
-│   ├── FILE_REFERENCE.md           # Per-file interview reference
-│   └── PROJECT_SUBMISSION_REPORT.md # Formal submission report
-├── resources/
-│   ├── views/
-│   │   ├── layouts/app.blade.php   # SRE cockpit layout with left sidebar
-│   │   ├── livewire/               # Livewire component views
-│   │   ├── activities/             # Activity CRUD views
-│   │   ├── admin/                  # Admin panel views
-│   │   ├── docs/                   # High-level documentation portal
-│   │   ├── emails/                 # Rich HTML email templates
-│   │   ├── errors/                 # Branded 404, 419, 403, 500, 503 error pages
-│   │   ├── health/                 # Interactive telemetry HUD
-│   │   ├── messages/               # Operational chat & email reply screens
-│   │   ├── monitoring/             # SRE monitoring console
-│   │   ├── policies/               # SLA & governance policy pages
-│   │   ├── reports/                # Reporting and chart views
-│   │   ├── settings/               # Account settings views
-│   │   └── auth/                   # Login form
-│   └── css/app.css                 # Tailwind entry point + brand tokens
-├── routes/
-│   ├── web.php                     # Web routes, public pages & webhook endpoints
-│   ├── auth.php                    # Login/logout routes
-│   └── console.php                 # Artisan scheduler cron jobs
-└── tests/
-    ├── Feature/                    # HTTP-level Pest feature tests
-    └── Unit/                       # Action/Service unit tests
-```
-
----
-
-## Key Architecture Decisions
-
-### Why Livewire over Inertia/React?
-Livewire avoids a JavaScript build pipeline for a small internal tool. The shift handover view benefits from `wire:poll` reactive updates (auto-refresh every 30s) without needing a full SPA. Evaluators can read pure PHP — no React layer to navigate.
-
-### Why two separate log tables?
-| Table | Purpose |
-|---|---|
-| `activity_logs` | Domain state changes — used for the shift board, business reporting, and the "current status" derivation |
-| `audit_logs` | Security/compliance record — every mutation across all subjects, with IP address and JSON diffs |
-
-These are intentionally separate. At scale, audit logs would be shipped to a SIEM. The activity_logs table is a first-class business entity.
-
-### Why denormalise actor names?
-Both `activity_logs` and `audit_logs` store `actor_name` as a snapshot. This preserves historical accuracy even if a user is renamed or deleted. The FK (`actor_id`) is also kept for joining, but is nullable so the row survives user deletion.
-
-### Why Action classes?
-Controllers only handle HTTP glue: validate via Form Request → delegate to Action → return response. Actions (`app/Actions/`) contain the pure business logic and are independently testable without HTTP.
-
-### Why soft deletes on activities?
-`Activity::delete()` sets `deleted_at` rather than removing the row. Historical `activity_logs` records reference the activity FK — hard-deleting would break reports for past periods.
-
----
-
-## Roles & Permissions
-
-| Permission | Agent | Lead | Admin |
-|---|---|---|---|
-| View daily board | ✅ | ✅ | ✅ |
-| Update own activity status | ✅ | ✅ | ✅ |
-| Create / edit activities | ❌ | ✅ | ✅ |
-| Delete activities | ❌ | ❌ | ✅ |
-| View reports | ❌ | ✅ | ✅ |
-| Email reports | ❌ | ✅ | ✅ |
-| Manage users | ❌ | ❌ | ✅ |
-| Update own profile & password | ✅ | ✅ | ✅ |
-
----
-
-## Deployment (Render Blueprint)
-
-This project ships an Infrastructure-as-Code [render.yaml](render.yaml) Blueprint for automated cloud deployment:
-
-1. Log in to [Render Dashboard](https://dashboard.render.com) and navigate to **Blueprints → New Blueprint Instance**.
-2. Connect your GitHub repository (`mhiskall282/opsora-saas`).
-3. Render automatically provisions the complete enterprise stack:
-   - **Opsora Web Service**: Dockerized Apache + PHP 8.2 runtime with OPcache and live health probe (`/up`).
-   - **Opsora Queue Worker**: Background processor for email notifications, alerts, and report generation.
-   - **Opsora Cron Scheduler**: Automated daily/weekly SLA digests and periodic telemetry polling.
-   - **Managed PostgreSQL Database**: High-availability relational database with SSL enforcement.
-4. Click **Apply** — Render automatically builds images, runs migrations, seeds core roles, and provisions SSL certificates.
-
-For complete environment variable details, see [Environment Variables Reference](docs/deployment/environment-variables.md) and [Render Deployment Guide](docs/deployment/render.md).
-
----
-
-## Cross-Platform Mobile Application (Flutter — Android & iOS)
-
-A native Flutter client (`npontu_sre_mobile`) built for site reliability engineers on call, field operators, and team leads managing production operations on Android and iOS devices.
-
-### Architecture & Tech Stack
-- **Framework**: Flutter 3.24+ (Dart 3.5+) on stable channel
-- **Design System**: Material 3 styled with official Npontu Brand Tokens (`#1B6B3A` Forest Green, `#F5C518` Gold Accent, `#E63946` Alert Red, `#0F1A14` Dark Console Slate)
-- **State Management**: Riverpod (`flutter_riverpod: ^2.6.1`) with feature-first modular structure
-- **Networking**: Dio (`dio: ^5.11.1`) with centralized Bearer token interceptor, exponential backoff retries, and comprehensive error normalization (`ApiException`)
-- **Navigation**: Declarative routing via GoRouter (`go_router: ^18.0.1`) with reactive authentication guards and redirection
-- **Security Storage**: `flutter_secure_storage` storing API tokens encrypted in Android KeyStore (AES-GCM) and iOS Keychain (`kSecAttrAccessibleAfterFirstUnlock`)
-
-### Mobile Feature Modules
-1. **SRE Operational Dashboard**: Shift overview metrics (total, pending, done, acknowledged), active system health probes, unread chats, and active incident warnings.
-2. **Daily Shift Activity Board**: Real-time checklist filtered by shift (`morning`, `afternoon`, `night`), status, or priority. Operators can update status inline with required remarks.
-3. **Shift Handover Protocol & Sign-off**: Two-way operational handover lifecycle with outgoing supervisor sign-off and incoming lead acceptance remarks.
-4. **Operations Messaging & War Rooms**: Shift channels (`#general-shift`), 1-on-1 direct operator messaging, active incident war rooms, and file/PDF attachment previews.
-5. **System Health & Diagnostic HUD**: Live status of MySQL database, cache, system memory, background queues, and mail subsystem.
-6. **Reporting & Compliance Metrics**: Real-time KPI summaries, date-range filtering, and SLA compliance statistics.
-7. **Team Directory**: SRE operator directory with engineering tiers (L1–L5), departments, and on-call availability badges.
-8. **Security Audit Trail**: Read-only timeline of all operational mutations with actor snapshots, IP addresses, and JSON before/after state diffs.
+### Mobile Features
+1. **Multi-Tenant Workspace Switcher**: Switch between corporate, client, and personal workspaces with instant context switching.
+2. **Company Code Join**: Join an organization directly from the mobile app by entering a company code (`NPT-OPS-01`).
+3. **Daily Shift Checklist**: Mark items `Done` or `Pending` inline with mandatory resolution remarks.
+4. **Digital Two-Way Handover**: Review briefings and accept oncoming operational custody directly on your phone.
+5. **Real-Time 3-Second Telemetry HUD**: Live stream of database latency, memory footprint, cache roundtrip, and queue health.
+6. **Incident War Rooms on Mobile**: Read and send operational messages, view PDF/image attachments, and receive notifications.
 
 ### Running the Mobile App Locally
 ```bash
-# 1. Navigate to the mobile app directory
 cd npontu_sre_mobile
-
-# 2. Install dependencies
 flutter pub get
 
-# 3. Run against local Laravel backend
-# For Android Emulator (using 10.0.2.2 bridge):
-flutter run --dart-define=API_BASE_URL=http://10.0.2.2:8000/api/v1
+# Windows Native Desktop (fastest for development)
+flutter run -d windows
 
-# For iOS Simulator:
-flutter run --dart-define=API_BASE_URL=http://localhost:8000/api/v1
+# Android Emulator (bridges to host via 10.0.2.2:8000)
+flutter run -d emulator-5554 --dart-define=API_BASE_URL=http://10.0.2.2:8000/api/v1
 
-# For Physical Device (replace with your machine LAN IP):
-flutter run --dart-define=API_BASE_URL=http://192.168.1.100:8000/api/v1
+# Target Live Render SaaS Backend
+flutter run --dart-define=API_BASE_URL=https://opsora-sre.onrender.com/api/v1
 ```
 
 ---
 
-## CI/CD Automation Workflows
+## 🛠️ Tech Stack
 
-Automated GitHub Actions pipelines ensure continuous code quality and release reliability:
-
-| Pipeline | Path | Trigger | Steps |
+| Layer | Technology | Version | Purpose |
 |---|---|---|---|
-| **Backend CI** | [`.github/workflows/backend-ci.yml`](.github/workflows/backend-ci.yml) | Push/PR to `main` (`app/`, `tests/`, etc.) | PHP 8.2 setup, Pint PSR-12 linting, SQLite migration & rollback verification, 96 Pest tests |
-| **Mobile CI** | [`.github/workflows/flutter-ci.yml`](.github/workflows/flutter-ci.yml) | Push/PR to `main` (`npontu_sre_mobile/`) | Flutter SDK setup, `dart format` verification, `flutter analyze`, 15 unit/widget tests, debug APK build |
+| **Framework** | Laravel | 11.x (LTS) | Robust ecosystem, typed properties, enums, Form Requests, Policies |
+| **Language** | PHP | 8.2+ | Strict types (`declare(strict_types=1);`), readonly properties |
+| **Database** | PostgreSQL / MySQL | 16+ / 8.0+ | Relational persistence, JSONB capabilities, InnoDB foreign keys |
+| **Frontend** | Blade + Livewire | Livewire 3.x | Reactive UI components without full SPA build complexity |
+| **CSS** | Tailwind CSS | 3.x | Utility-first design tokens with official Npontu Brand styling |
+| **Mobile Client** | Flutter | 3.24+ | Cross-platform on-call client (Android, iOS, Windows Desktop) |
+| **Testing** | Pest | 2.x | Expressive, readable feature and unit test suites |
+| **Code Style** | Laravel Pint | latest | PSR-12 strict enforcement |
 
 ---
 
+## 🧪 Verification & Testing
+
+Both the backend and mobile applications maintain comprehensive test coverage:
+
+```bash
+# 1. Run full Laravel backend test suite (173 tests, 827 assertions)
+./vendor/bin/pest
+
+# 2. Run PSR-12 code style verification
+./vendor/bin/pint --test
+
+# 3. Run Flutter mobile unit and widget tests (25 tests)
+cd npontu_sre_mobile
+flutter test
+
+# 4. Test live Render production connectivity probe
+flutter test test/live_render_integration_test.dart
+```
+
 ---
 
-## Production Cloud Deployment (Blueprints &amp; IaC)
+## ☁️ Production Cloud Deployment (Blueprints & IaC)
 
 | Target Platform | Infrastructure Blueprint | Step-by-Step Runbook | Architecture Model |
 |---|---|---|---|
 | **Render.com** | [`render.yaml`](render.yaml) | [`docs/deployment/render.md`](docs/deployment/render.md) | Multi-Service Container (Web + Queue Worker + Cron + Managed PostgreSQL) |
 | **Vercel** | [`vercel.json`](vercel.json) | [`docs/deployment/vercel.md`](docs/deployment/vercel.md) | Serverless Functions (`vercel-php`) + Edge Asset CDN + Cloud Database |
 
+### One-Click Render Blueprint Deployment
+1. Log in to the [Render Dashboard](https://dashboard.render.com) and click **Blueprints → New Blueprint Instance**.
+2. Connect repository `mhiskall282/opsora-saas`.
+3. Render automatically provisions:
+   - **Opsora Web Service**: Dockerized Apache + PHP 8.2 with OPcache and health check (`/up`).
+   - **Opsora Queue Worker**: Background processor for email notifications, alerts, and report generation.
+   - **Opsora Cron Scheduler**: Automated daily/weekly SLA digests and periodic telemetry polling.
+   - **Managed PostgreSQL Database**: High-availability relational database with SSL enforcement.
+4. Click **Apply** — Render automatically builds images, runs migrations, seeds core roles, and provisions SSL certificates.
+
 ---
 
-## Documentation Index
+## 📚 Documentation Index
 
-| Document | Contents |
+| Document | Description |
 |---|---|
-| [README.md](README.md) | Project overview, web & mobile setup, architecture, and verification commands |
+| [README.md](README.md) | Complete SaaS platform overview, architecture, web & mobile setup |
 | [docs/deployment/environment-variables.md](docs/deployment/environment-variables.md) | Complete environment variable specification, Render cloud secrets, and SMTP/S3 setups |
 | [docs/deployment/render.md](docs/deployment/render.md) | Comprehensive 1-click blueprint guide for deploying Web, Workers, Cron, and PostgreSQL on Render |
 | [docs/deployment/vercel.md](docs/deployment/vercel.md) | Serverless PHP architecture guide, ephemeral storage bridge, and deployment guide for Vercel |
 | [docs/architecture/saas-control-plane-architecture.md](docs/architecture/saas-control-plane-architecture.md) | Enterprise SaaS control plane, tenant isolation, impersonation protocol, and Mermaid diagrams |
 | [docs/admin/platform-governance.md](docs/admin/platform-governance.md) | Control plane administrative runbook, emergency maintenance lockout, and operational protocols |
-| [docs/mobile-expansion-audit.md](docs/mobile-expansion-audit.md) | Comprehensive initial architecture audit, database schemas, roles, and API gap analysis |
+| [docs/mobile-expansion-audit.md](docs/mobile-expansion-audit.md) | Comprehensive architecture audit, database schemas, roles, and API gap analysis |
 | [docs/mobile-api.md](docs/mobile-api.md) | Exhaustive REST API v1 developer reference with request/response envelopes |
 | [docs/api/openapi.yaml](docs/api/openapi.yaml) | Complete OpenAPI 3.0 / Swagger specification covering all 33 endpoints |
 | [docs/security/mobile-threat-model.md](docs/security/mobile-threat-model.md) | STRIDE threat model, mobile security vectors, token revocation, and residual risk mitigations |
-| [docs/deployment/mobile-deployment.md](docs/deployment/mobile-deployment.md) | Backend hosting (Render/Forge), Google Play App Bundle (AAB), and iOS TestFlight procedures |
-| [docs/deployment/store-publishing-guide.md](docs/deployment/store-publishing-guide.md) | Complete step-by-step Google Play Console & Apple App Store Connect submission guide |
+| [docs/deployment/mobile-deployment.md](docs/deployment/mobile-deployment.md) | Backend hosting, Google Play App Bundle (AAB), and iOS TestFlight procedures |
+| [docs/deployment/store-publishing-guide.md](docs/deployment/store-publishing-guide.md) | Step-by-step Google Play Console & Apple App Store Connect submission guide |
 | [docs/mobile-development.md](docs/mobile-development.md) | Mobile developer guide: emulator networking, Riverpod conventions, testing, and debugging |
 | [docs/observability.md](docs/observability.md) | SRE observability, correlation IDs, logging standards, Prometheus/Grafana metrics, and runbooks |
-| [docs/requirements.md](docs/requirements.md) | Functional requirements + original grading rubric |
-| [docs/architecture.md](docs/architecture.md) | Original ERD, module map, and deployment diagram |
-| [docs/context.md](docs/context.md) | Brand guidelines and business context |
-| [docs/FILE_REFERENCE.md](docs/FILE_REFERENCE.md) | Per-file purpose + evaluation interview Q&A |
+| [docs/saas/migration-plan.md](docs/saas/migration-plan.md) | Coexistence migration plan: legacy single-tenant & multi-tenant SaaS side-by-side |
 
 ---
 
 ## 🤝 Open Source & Contributing
 
-We welcome community contributions, bug reports, and feature proposals! Opsora SRE is built with the belief that mission-critical operations software should be accessible, robust, and community-driven.
+We welcome community contributions, bug reports, and feature proposals! Opsora SaaS is built with the belief that mission-critical operations software should be accessible, robust, and community-driven.
 
 - 📖 **[Contributing Guide](CONTRIBUTING.md)**: Setup guides, coding standards, and PR workflows.
 - 📜 **[Code of Conduct](CODE_OF_CONDUCT.md)**: Community standards and inclusive communication expectations.
@@ -680,13 +291,13 @@ We welcome community contributions, bug reports, and feature proposals! Opsora S
 
 ## 📄 License
 
-Opsora SRE is open-sourced software licensed under the [MIT License](LICENSE).
+Opsora SaaS is open-sourced software licensed under the [MIT License](LICENSE).
 
 ---
 
 ## 🏷️ GitHub Search Keywords & Topics
 
-`site-reliability-engineering` • `sre` • `devops` • `shift-handover` • `on-call` • `incident-management` • `telemetry` • `system-health` • `uptime-monitoring` • `laravel-11` • `livewire-3` • `flutter` • `dart` • `mobile-app` • `multitenant-saas` • `compliance-audit` • `open-source` • `hacktoberfest` • `docker` • `postgresql` • `tailwind-css`
+`saas` • `multi-tenancy` • `site-reliability-engineering` • `sre` • `devops` • `shift-handover` • `on-call` • `incident-management` • `telemetry` • `system-health` • `uptime-monitoring` • `laravel-11` • `livewire-3` • `flutter` • `dart` • `mobile-app` • `control-plane` • `compliance-audit` • `open-source` • `hacktoberfest` • `docker` • `postgresql` • `tailwind-css`
 
 ---
 

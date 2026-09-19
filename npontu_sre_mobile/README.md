@@ -43,7 +43,7 @@ flutter run -d "iPhone 15 Pro" \
 flutter run --dart-define=API_BASE_URL=http://192.168.1.x:8000/api/v1
 
 # Production backend
-flutter run --dart-define=API_BASE_URL=https://npontu-support-tracker.onrender.com/api/v1
+flutter run --dart-define=API_BASE_URL=https://opsora-sre.onrender.com/api/v1
 ```
 
 ---
@@ -58,7 +58,7 @@ flutter build apk \
   --split-per-abi \
   --obfuscate \
   --split-debug-info=build/debug-info \
-  --dart-define=API_BASE_URL=https://npontu-support-tracker.onrender.com/api/v1
+  --dart-define=API_BASE_URL=https://opsora-sre.onrender.com/api/v1
 ```
 
 Output: `build/app/outputs/flutter-apk/`
@@ -75,7 +75,7 @@ flutter build appbundle \
   --release \
   --obfuscate \
   --split-debug-info=build/debug-info \
-  --dart-define=API_BASE_URL=https://npontu-support-tracker.onrender.com/api/v1
+  --dart-define=API_BASE_URL=https://opsora-sre.onrender.com/api/v1
 ```
 
 Output: `build/app/outputs/bundle/release/app-release.aab`

@@ -19,7 +19,7 @@ This guide describes the end-to-end deployment procedures for the Npontu Technol
 APP_NAME="Npontu SRE"
 APP_ENV=production
 APP_DEBUG=false
-APP_URL=https://npontu-support-tracker.onrender.com
+APP_URL=https://opsora-sre.onrender.com
 
 DB_CONNECTION=mysql 
 DB_HOST=[IP_ADDRESS]
@@ -32,8 +32,8 @@ CACHE_STORE=redis
 QUEUE_CONNECTION=redis
 SESSION_DRIVER=redis
 
-SANCTUM_STATEFUL_DOMAINS=npontu-support-tracker.onrender.com
-CORS_ALLOWED_ORIGINS="https://npontu-support-tracker.onrender.com"
+SANCTUM_STATEFUL_DOMAINS=opsora-sre.onrender.com
+CORS_ALLOWED_ORIGINS="https://opsora-sre.onrender.com"
 ```
 
 ### 1.3 Deployment Script (`deploy.sh`)

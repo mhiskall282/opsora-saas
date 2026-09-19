@@ -3,8 +3,9 @@
 **Application Name**: Opsora SRE Operations Platform  
 **Developer**: John Okyere (`hello@johnokyere.xyz`)  
 **Live Custom Domain**: [https://npontu-tracker.johnokyere.xyz](https://npontu-tracker.johnokyere.xyz)  
-**Render Endpoint**: [https://npontu-support-tracker.onrender.com](https://npontu-support-tracker.onrender.com)  
-**GitHub Repository**: [https://github.com/mhiskall282/npontu-technologies-sre](https://github.com/mhiskall282/npontu-technologies-sre)  
+**Render Endpoint**: [https://opsora-sre.onrender.com](https://opsora-sre.onrender.com)  
+**SaaS Repository**: [https://github.com/mhiskall282/opsora-saas](https://github.com/mhiskall282/opsora-saas)  
+**Core SRE Repository**: [https://github.com/mhiskall282/opsora-sre](https://github.com/mhiskall282/opsora-sre)  
 **Date of Submission**: September 2026  
 
 ---
@@ -22,16 +23,16 @@ It solves the operational challenge of fragmented shift handovers by offering:
 
 ---
 
-## 2. Default Access Credentials
+## 2. Role-Based Access Tiers
 
-For testing and evaluation, the production database is seeded with the following default role accounts:
+The system enforces granular role separation:
 
-| Role | Name | Email | Password | Access Privileges |
-|---|---|---|---|---|
-| **Principal Administrator** | John Okyere | `hello@johnokyere.xyz` | `password` | Full root platform access, system configuration, user provisioning |
-| **Administrator** | Kwame Mensah | `admin@npontu.local` | `password` | Full system access, user management, activity creation, audit monitoring |
-| **Team Lead** | Abena Owusu | `lead@npontu.local` | `password` | Activity management, shift board oversight, reports & SRE monitoring |
-| **Support Agent** | Kofi Asante | `agent@npontu.local` | `password` | Shift checklist status updates, remark logging, personal settings |
+| Role | Access Level | Description |
+|---|---|---|
+| **Principal Administrator** | Super Admin | Full root platform access, system configuration, tenant provisioning |
+| **Administrator** | Tenant Admin | Workspace user management, activity creation, audit monitoring |
+| **Team Lead** | Lead | Activity management, shift board oversight, reports & SRE monitoring |
+| **Support Agent** | Agent | Shift checklist status updates, remark logging, personal settings |
 
 ---
 

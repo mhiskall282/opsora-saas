@@ -460,7 +460,7 @@ prefix /admin  (role:admin,lead)
 **What it does**: Branded 404 page for missing endpoints, unknown checklist URLs, or stale links. Offers 1-click navigation shortcuts to Today's Board, Ops Comms, and System Health.
 
 ### `403.blade.php` (Access Forbidden)
-**What it does**: Security gate page for unauthorized role or capability requests. Informs operators of the required permissions and provides administrator contact details (`admin@npontu.local`).
+**What it does**: Security gate page for unauthorized role or capability requests. Informs operators of the required permissions and provides administrator contact details (`hello@johnokyere.xyz`).
 
 ### `500.blade.php` (SRE Runtime Exception)
 **What it does**: Branded 500 error display with dynamic incident reference code (`INC-YYYYMMDD-XXXXXX`), reassurance that automated telemetry alerts have fired, and 1-click Retry / Inspect Health HUD CTAs.
@@ -522,7 +522,7 @@ prefix /admin  (role:admin,lead)
 ## Live Deployment URL & Endpoints
 
 - **Live Custom Domain**: [https://npontu-tracker.johnokyere.xyz](https://npontu-tracker.johnokyere.xyz)
-- **Render Primary Endpoint**: `https://npontu-support-tracker.onrender.com`
+- **Render Primary Endpoint**: `https://opsora-sre.onrender.com`
 - **Shift Board**: `GET /daily`
 - **SRE Monitoring**: `GET /monitoring` (Admin/Lead)
 - **Account Settings**: `GET /settings`

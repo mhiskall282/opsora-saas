@@ -3,7 +3,7 @@
 class AppConfig {
   // Live Render production backend URL
   static const String defaultProductionUrl =
-      'https://npontu-support-tracker.onrender.com/api/v1';
+      'https://opsora-sre.onrender.com/api/v1';
 
   // Local development fallbacks
   static const String defaultLocalUrl = 'http://127.0.0.1:8000/api/v1';

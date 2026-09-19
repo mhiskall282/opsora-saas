@@ -1,8 +1,8 @@
 # Mobile Store Publishing Guide: Google Play Store & Apple App Store
 
 > **Platform**: Npontu Technologies SRE Operations Mobile (`npontu_sre_mobile`)  
-> **Backend Deployment**: [https://npontu-support-tracker.onrender.com](https://npontu-support-tracker.onrender.com)  
-> **API Version**: `v1` (`https://npontu-support-tracker.onrender.com/api/v1`)  
+> **Backend Deployment**: [https://opsora-sre.onrender.com](https://opsora-sre.onrender.com)  
+> **API Version**: `v1` (`https://opsora-sre.onrender.com/api/v1`)  
 > **Application ID / Bundle ID**: `com.npontu.sre.npontuSreMobile`
 
 ---
@@ -93,7 +93,7 @@ flutter clean
 flutter pub get
 
 # Build Release App Bundle pointing to live Render production backend
-flutter build appbundle --release --dart-define=API_BASE_URL=https://npontu-support-tracker.onrender.com/api/v1
+flutter build appbundle --release --dart-define=API_BASE_URL=https://opsora-sre.onrender.com/api/v1
 ```
 
 The output bundle will be generated at:
@@ -112,7 +112,7 @@ The output bundle will be generated at:
    - **App or game**: App
    - **Free or paid**: Free
 2. **App Content Declarations**:
-   - **Privacy Policy**: `https://npontu-support-tracker.onrender.com/privacy-policy`
+   - **Privacy Policy**: `https://opsora-sre.onrender.com/privacy-policy`
    - **App Access**: Select "All or some functionality is restricted". Provide credentials for a dedicated reviewer account provisioned from your workspace admin console:
      - *Username*: `[Reviewer Account Email]`
      - *Password*: `[Reviewer Secure Password]`
@@ -191,7 +191,7 @@ pod install
 cd ..
 
 # Build release IPA targeting live Render backend
-flutter build ipa --release --dart-define=API_BASE_URL=https://npontu-support-tracker.onrender.com/api/v1
+flutter build ipa --release --dart-define=API_BASE_URL=https://opsora-sre.onrender.com/api/v1
 ```
 
 The output archive is created at:
@@ -221,21 +221,21 @@ xcrun altool --upload-app --type ios \
 
 1. Log into [appstoreconnect.apple.com](https://appstoreconnect.apple.com) &rarr; **My Apps** &rarr; `+` **New App**.
    - **Platforms**: iOS
-   - **Name**: `Npontu SRE Operations`
+   - **Name**: `Opsora SRE`
    - **Primary Language**: English (U.S.)
-   - **Bundle ID**: `com.npontu.sre.npontuSreMobile`
-   - **SKU**: `NPONTU-SRE-IOS-001`
+   - **Bundle ID**: `com.npontu.sre.opsoraSreMobile`
+   - **SKU**: `OP-SRE-IOS-001`
    - **User Access**: Full Access
 2. **App Information & Privacy**:
    - **Category**: Business / Developer Tools
-   - **Privacy Policy URL**: `https://npontu-support-tracker.onrender.com/privacy-policy`
+   - **Privacy Policy URL**: `https://opsora-sre.onrender.com/privacy-policy`
    - **App Privacy Declarations**:
      - *User Content*: Photos/Files (for incident logs) - linked to user, not used for tracking.
      - *Identifiers*: User ID - linked to user.
 3. **App Review Information**:
    - **Sign-in Information**: Required
-   - **Username**: `[Dedicated App Store Review Account Email]`
-   - **Password**: `[Dedicated App Store Review Account Password]`
+   - **Username**: `[EMAIL_ADDRESS]`
+   - **Password**: `[PASSWORD]`
    - **Notes for Reviewer**:
      > "Opsora SRE is an enterprise site reliability engineering monitoring tool. The review credentials grant access to active shift boards, two-way handover workflows, and system telemetry probes hosted at your deployed platform URL."
 4. **TestFlight Distribution**:
@@ -243,7 +243,7 @@ xcrun altool --upload-app --type ios \
    - Add **Internal Testing Group** (leads and SRE engineers get instant access via TestFlight app).
    - Create **External Testing Group** with public link or email invites.
 5. **Submit for App Review**:
-   - Attach screenshots (6.7" iPhone 16 Pro Max and 6.5" iPhone 11 Pro Max).
+   - Attach build from TestFlight.
    - Click **Submit for Review**. App Store review typically completes within 24–48 hours.
 
 ---
@@ -273,9 +273,9 @@ flowchart LR
 
 | Service | Endpoint | Status |
 |---|---|---|
-| **Web SRE Cockpit** | [https://npontu-support-tracker.onrender.com](https://npontu-support-tracker.onrender.com) | **Live & Operational** |
-| **System Health API** | [https://npontu-support-tracker.onrender.com/health](https://npontu-support-tracker.onrender.com/health) | **HTTP 200 (Uptime SLA 99.98%)** |
-| **REST API v1 Gateway** | [https://npontu-support-tracker.onrender.com/api/v1](https://npontu-support-tracker.onrender.com/api/v1) | **Active on Push** |
+| **Web SRE Cockpit** | [https://opsora-sre.onrender.com](https://opsora-sre.onrender.com) | **Live & Operational** |
+| **System Health API** | [https://opsora-sre.onrender.com/health](https://opsora-sre.onrender.com/health) | **HTTP 200 (Uptime SLA 99.98%)** |
+| **REST API v1 Gateway** | [https://opsora-sre.onrender.com/api/v1](https://opsora-sre.onrender.com/api/v1) | **Active on Push** |
 | **OpenAPI 3.0 Specs** | `docs/api/openapi.yaml` | **33 Endpoints Documented** |
-| **Privacy Policy URL** | `https://npontu-support-tracker.onrender.com/privacy-policy` | **Live & Store Compliant** |
-| **Terms of Service** | `https://npontu-support-tracker.onrender.com/terms-of-service` | **Live & Store Compliant** |
+| **Privacy Policy URL** | `https://opsora-sre.onrender.com/privacy-policy` | **Live & Store Compliant** |
+| **Terms of Service** | `https://opsora-sre.onrender.com/terms-of-service` | **Live & Store Compliant** |

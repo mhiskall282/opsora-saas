@@ -376,8 +376,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               const SizedBox(height: 16),
               _buildServerOption(
                 title: 'Render Cloud (Production Live)',
-                subtitle: 'https://npontu-support-tracker.onrender.com/api/v1',
-                url: 'https://npontu-support-tracker.onrender.com/api/v1',
+                subtitle: 'https://opsora-sre.onrender.com/api/v1',
+                url: 'https://opsora-sre.onrender.com/api/v1',
                 ctx: ctx,
               ),
               _buildServerOption(

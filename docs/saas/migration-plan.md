@@ -77,10 +77,10 @@ To ensure legacy and new deployments run side-by-side without interference:
 
 | Environment | Branch | Target URL | Database | Purpose |
 |---|---|---|---|---|
-| **Legacy Single-Tenant** | `main` or `legacy/single-tenant` | `https://npontu-support-tracker.onrender.com` | `npontu_legacy_db` | Continues serving daily operational shift tracking for Npontu operators. |
-| **New Multi-Tenant SaaS** | `feat/opsora-saas` | `https://opsora-saas.onrender.com` | `opsora_saas_db` | Pilot deployment for multi-tenant organizations, commercial billing, and control plane. |
-| **Platform Control Plane** | `feat/opsora-saas` | `https://opsora-saas.onrender.com/admin/platform` | `opsora_saas_db` | Super Admin oversight across all tenant organizations. |
-| **Mobile API Ingress** | `feat/opsora-saas` | `https://opsora-saas.onrender.com/api/v1` | `opsora_saas_db` | Supports `/me`, `/workspaces`, `/activities`, `/handovers` with SaaS tenant metadata. |
+| **Production SaaS** | `feat/opsora-saas` / `main` | `https://opsora-sre.onrender.com` | `opsora_saas_db` | Live deployment for multi-tenant organizations, operational checklists, and control plane. |
+| **Platform Control Plane** | `feat/opsora-saas` / `main` | `https://opsora-sre.onrender.com/admin/platform` | `opsora_saas_db` | Super Admin oversight across all tenant organizations. |
+| **Mobile API Ingress** | `feat/opsora-saas` / `main` | `https://opsora-sre.onrender.com/api/v1` | `opsora_saas_db` | Supports `/me`, `/workspaces`, `/activities`, `/handovers` with SaaS tenant metadata. |
+| **Local Development** | any | `http://127.0.0.1:8000` | SQLite / MySQL | Local development cockpit and test suite. |
 
 ### 3.1 Domain & Subdomain Resolution Matrix
 
@@ -175,10 +175,9 @@ This guarantees that:
 
 ### 5.1 Dynamic Ingress Configuration
 The Flutter mobile application (`npontu_sre_mobile`) contains a built-in server switcher on the login screen supporting:
-1. **Production SaaS**: `https://opsora-saas.onrender.com/api/v1`
-2. **Legacy Production**: `https://npontu-support-tracker.onrender.com/api/v1`
-3. **Local Development**: `http://127.0.0.1:8000/api/v1`
-4. **Android Emulator**: `http://10.0.2.2:8000/api/v1`
+1. **Production SaaS**: `https://opsora-sre.onrender.com/api/v1`
+2. **Local Development**: `http://127.0.0.1:8000/api/v1`
+3. **Android Emulator**: `http://10.0.2.2:8000/api/v1`
 
 ### 5.2 Mobile Payload Schema
 When an operator logs in, `/api/v1/me` and `/api/v1/workspaces` return:
@@ -186,8 +185,8 @@ When an operator logs in, `/api/v1/me` and `/api/v1/workspaces` return:
 {
   "user": {
     "id": 1,
-    "name": "Kwame Mensah",
-    "email": "admin@npontu.local",
+    "name": "Operations Lead",
+    "email": "lead@opsora.io",
     "role": "admin",
     "grade": "L5",
     "organization": {

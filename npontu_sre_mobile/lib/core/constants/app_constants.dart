@@ -10,7 +10,7 @@ class AppConstants {
   static const String buildNumber = '3';
   static const String baseUrl = String.fromEnvironment(
     'API_BASE_URL',
-    defaultValue: 'https://npontu-support-tracker.onrender.com/api/v1',
+    defaultValue: 'https://opsora-sre.onrender.com/api/v1',
   );
 
   // Storage Keys

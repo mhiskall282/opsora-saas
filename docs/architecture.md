@@ -862,7 +862,7 @@ sequenceDiagram
 | 18 | Public SRE Landing Page at Root (`/`) | High-Impact SRE Landing View with Test Roles Showcase | Immediate blank redirect to `/login` | Educates external evaluators and leadership on platform capabilities |
 | 19 | Cross-Platform Mobile Client | Flutter 3.24+ (Dart) with Riverpod + Dio | React Native / Progressive Web App | Single high-performance codebase for iOS and Android, native KeyStore/Keychain security |
 | 20 | Mobile Authentication Protocol | Laravel Sanctum Personal Access Tokens | JWT / OAuth2 Passport | Native Laravel ecosystem alignment, simple revocation, token hash in DB |
-| 21 | Production Cloud Deployment | Render Web Service (`https://npontu-support-tracker.onrender.com`) | Self-hosted VPS | Automated Git-backed continuous deployments with persistent disk storage |
+| 21 | Production Cloud Deployment | Render Web Service (`https://opsora-sre.onrender.com`) | Self-hosted VPS | Automated Git-backed continuous deployments with managed PostgreSQL and Docker |
 
 
 

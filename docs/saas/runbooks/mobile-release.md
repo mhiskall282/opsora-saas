@@ -19,8 +19,8 @@ All 25 tests must pass (including widget tests, model serialization, secure stor
 ## 2. Workspace & API Endpoint Configuration
 
 Verify environment endpoints in `lib/core/config/app_config.dart`:
-- **Production API URL**: `https://npontu-support-tracker.onrender.com/api/v1`
-- **Render Production Health Probe**: `https://npontu-technologies-sre.onrender.com/api/health`
+- **Production API URL**: `https://opsora-sre.onrender.com/api/v1`
+- **Render Production Health Probe**: `https://opsora-sre.onrender.com/health`
 - **Header Propagation**: Ensure `X-Workspace-Id` interceptor is active in `ApiClient`.
 
 ---

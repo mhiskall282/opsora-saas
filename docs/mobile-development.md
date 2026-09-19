@@ -40,7 +40,7 @@ flutter pub get
 | Windows Desktop (PC) | `http://127.0.0.1:8000/api/v1` |
 | iOS Simulator | `http://localhost:8000/api/v1` |
 | Physical Device | `http://<YOUR_LAN_IP>:8000/api/v1` |
-| Production | `https://npontu-support-tracker.onrender.com/api/v1` |
+| Production | `https://opsora-sre.onrender.com/api/v1` |
 
 ```bash
 # Windows Native Desktop (Fastest local testing on PC — no emulator needed)
@@ -102,7 +102,7 @@ To run and test the mobile application locally in an Android Virtual Device (AVD
    ```bash
    # Build Universal APK (v1.1.0+2)
    cd npontu_sre_mobile
-   flutter build apk --release --dart-define=API_BASE_URL=https://npontu-support-tracker.onrender.com/api/v1
+   flutter build apk --release --dart-define=API_BASE_URL=https://opsora-sre.onrender.com/api/v1
 
    # Install directly onto the running emulator
    adb install -r build/app/outputs/flutter-apk/app-release.apk
@@ -110,7 +110,7 @@ To run and test the mobile application locally in an Android Virtual Device (AVD
 
 6. **Hot Reload / Debug Testing**:
    ```bash
-   flutter run -d emulator-5554 --dart-define=API_BASE_URL=https://npontu-support-tracker.onrender.com/api/v1
+   flutter run -d emulator-5554 --dart-define=API_BASE_URL=https://opsora-sre.onrender.com/api/v1
    ```
 
 ## 3. Architecture & Code Structure
@@ -218,7 +218,7 @@ flutter build apk \
   --split-per-abi \
   --obfuscate \
   --split-debug-info=build/debug-info \
-  --dart-define=API_BASE_URL=https://npontu-support-tracker.onrender.com/api/v1
+  --dart-define=API_BASE_URL=https://opsora-sre.onrender.com/api/v1
 ```
 
 Output (`build/app/outputs/flutter-apk/`):
@@ -238,7 +238,7 @@ flutter build appbundle \
   --release \
   --obfuscate \
   --split-debug-info=build/debug-info \
-  --dart-define=API_BASE_URL=https://npontu-support-tracker.onrender.com/api/v1
+  --dart-define=API_BASE_URL=https://opsora-sre.onrender.com/api/v1
 ```
 
 Play Store automatically splits the bundle by ABI, density, and language. Users download only what their device needs (~15–25 MB).

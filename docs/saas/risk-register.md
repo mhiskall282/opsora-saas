@@ -38,5 +38,5 @@
 - **Enforcement**:
   1. A dedicated baseline seeder provisions Organization `#1` as "Npontu Technologies (Internal SRE)".
   2. All pre-existing database records are backfilled to Organization `#1` and Workspace `#1`.
-  3. Pre-existing test credentials (`admin@npontu.local`, etc.) are pre-attached to Workspace `#1`.
+  3. Pre-existing tenant accounts (`admin@opsora.internal`, etc.) are pre-attached to Workspace `#1`.
   4. All existing tests run and pass against Workspace `#1`.

@@ -132,46 +132,43 @@
     <div class="meta-box">
         <div class="meta-item"><strong>Developer / Engineer:</strong> JOHN OKYERE (<a href="mailto:hello@johnokyere.xyz">hello@johnokyere.xyz</a>)</div>
         <div class="meta-item"><strong>Live Custom Domain:</strong> <a href="https://npontu-tracker.johnokyere.xyz">https://npontu-tracker.johnokyere.xyz</a></div>
-        <div class="meta-item"><strong>Render Direct Endpoint:</strong> <a href="https://npontu-support-tracker.onrender.com">https://npontu-support-tracker.onrender.com</a></div>
-        <div class="meta-item"><strong>GitHub Repository:</strong> <a href="https://github.com/mhiskall282/npontu-technologies-sre">https://github.com/mhiskall282/npontu-technologies-sre</a></div>
+        <div class="meta-item"><strong>Render Direct Endpoint:</strong> <a href="https://opsora-sre.onrender.com">https://opsora-sre.onrender.com</a></div>
+        <div class="meta-item"><strong>GitHub Repository:</strong> <a href="https://github.com/mhiskall282/opsora-saas">https://github.com/mhiskall282/opsora-saas</a></div>
         <div class="meta-item"><strong>Architecture:</strong> Enterprise 4-Tier Pattern (Presentation, HTTP/App, Business/Services, Data Access)</div>
     </div>
 
     <h2>1. Executive Summary & Business Value</h2>
     <p>The <strong>Support Activity Tracker</strong> is a specialized operations management platform built for SRE and Support Engineering teams at Npontu Technologies. It addresses shift handover fragmentation by offering real-time checklist tracking, immutable compliance logging, SRE monitoring metrics, multi-format reporting (PDF print & CSV export), and user role management.</p>
 
-    <h2>2. Default Evaluation Credentials</h2>
+    <h2>2. RBAC Role Governance & Provisioning</h2>
+    <p>In accordance with production security standards, default sample credentials have been removed. System administrators provision users with strict role segregation:</p>
     <table>
         <thead>
             <tr>
                 <th>Role</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Default Password</th>
+                <th>Responsibility</th>
                 <th>Access Privileges</th>
+                <th>Provisioning Method</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td><span class="badge badge-admin">Administrator</span></td>
-                <td>Kwame Mensah</td>
-                <td>admin@npontu.local</td>
-                <td>password</td>
+                <td>System Governance</td>
                 <td>Full system management, user CRUD, checklist configuration, audit logs</td>
+                <td>Initial registration or CLI <code>php artisan tinker</code></td>
             </tr>
             <tr>
                 <td><span class="badge badge-lead">Team Lead</span></td>
-                <td>Abena Owusu</td>
-                <td>lead@npontu.local</td>
-                <td>password</td>
+                <td>Shift Supervision</td>
                 <td>Shift board oversight, activity management, reports, SRE monitoring</td>
+                <td>Invited & assigned by Administrator</td>
             </tr>
             <tr>
                 <td><span class="badge badge-agent">Support Agent</span></td>
-                <td>Kofi Asante</td>
-                <td>agent@npontu.local</td>
-                <td>password</td>
+                <td>Operational Execution</td>
                 <td>Shift checklist status updates, remark entry, account settings</td>
+                <td>Invited & assigned by Administrator</td>
             </tr>
         </tbody>
     </table>

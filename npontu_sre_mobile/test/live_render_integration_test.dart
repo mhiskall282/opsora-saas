@@ -22,7 +22,7 @@ void main() {
       () async {
         try {
           final response = await directDio.get<Map<String, dynamic>>(
-            'https://npontu-support-tracker.onrender.com/health',
+            'https://opsora-sre.onrender.com/health',
           );
 
           if (response.statusCode == 200 && response.data != null) {

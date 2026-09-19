@@ -1,16 +1,60 @@
 # Opsora SRE — Site Reliability Engineering Operations Platform
 
-> **A mission-critical Laravel 11 + Flutter companion application** for 24/7 engineering operations teams to execute verified shift checklists, record status updates with immutable audit trails, manage two-way handovers, war rooms, and real-time operational telemetry.
+> **A mission-critical, open-source Laravel 11 + Flutter ecosystem** for 24/7 engineering operations teams to execute verified shift checklists, record status updates with immutable audit trails, manage two-way handovers, war rooms, and real-time operational telemetry.
 
-🌐 **Production Deployment**: [https://npontu-support-tracker.onrender.com](https://npontu-support-tracker.onrender.com)
-
-[![Backend Tests](https://img.shields.io/badge/backend%20tests-173%20passing%20(825%20assertions)-brightgreen)](tests/)
+[![Production Live](https://img.shields.io/badge/Live%20Demo-opsora--sre.onrender.com-1B6B3A?style=flat&logo=render)](https://opsora-sre.onrender.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-F5C518.svg)](LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![Backend Tests](https://img.shields.io/badge/backend%20tests-173%20passing%20(827%20assertions)-brightgreen)](tests/)
 [![Mobile Tests](https://img.shields.io/badge/mobile%20tests-25%20passing-brightgreen)](npontu_sre_mobile/test/)
-[![PHP](https://img.shields.io/badge/PHP-8.2+-blue)](https://php.net)
-[![Laravel](https://img.shields.io/badge/Laravel-11.x-red)](https://laravel.com)
+[![PHP](https://img.shields.io/badge/PHP-8.2+-blue?logo=php)](https://php.net)
+[![Laravel](https://img.shields.io/badge/Laravel-11.x-red?logo=laravel)](https://laravel.com)
 [![Flutter](https://img.shields.io/badge/Flutter-3.24+-02569B?logo=flutter)](npontu_sre_mobile/)
-[![Tailwind](https://img.shields.io/badge/Tailwind-3.x-cyan)](https://tailwindcss.com)
-[![MVP Ready](https://img.shields.io/badge/MVP%20Pilot-Ready%20%26%20Verified-brightgreen)](docs/mvp/README.md)
+[![Tailwind](https://img.shields.io/badge/Tailwind-3.x-38B2AC?logo=tailwind-css)](https://tailwindcss.com)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker&logoColor=white)](#-60-second-quickstart-docker)
+
+🌐 **Live Demo & Real-Time Status**:
+- **Web Console**: [https://opsora-sre.onrender.com](https://opsora-sre.onrender.com)
+- **Real-Time Telemetry & Status**: [https://opsora-sre.onrender.com/health](https://opsora-sre.onrender.com/health)
+- **Documentation & API Specs**: [https://opsora-sre.onrender.com/docs](https://opsora-sre.onrender.com/docs)
+- **API Base**: `https://opsora-sre.onrender.com/api/v1`
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/mhiskall282/opsora-saas)
+
+> 🌟 **Star this repository** if you find Opsora SRE useful for your engineering and operations teams! It helps the project grow and reach more SREs worldwide.
+
+---
+
+### ⚡ 60-Second Quickstart (Docker)
+
+Get Opsora SRE up and running locally with one command:
+
+```bash
+# Clone the repository
+git clone https://github.com/mhiskall282/opsora-saas.git
+cd opsora-saas
+
+# Copy environment template
+cp .env.example .env
+
+# Build and start all services (Web, PostgreSQL, Worker)
+docker compose up -d
+
+# Run database migrations and seeds
+docker compose exec app php artisan migrate --seed
+```
+Open [http://localhost:8000](http://localhost:8000) in your browser!
+
+---
+
+### 📱 Download Android APK & Mobile Companion
+
+- **Android APK (ARM64)**: Pre-compiled binaries available in [GitHub Releases](https://github.com/mhiskall282/opsora-saas/releases) or build directly with:
+  ```bash
+  cd npontu_sre_mobile
+  flutter build apk --split-per-abi --dart-define=API_BASE_URL=https://opsora-sre.onrender.com/api/v1
+  ```
+- **App Store & Google Play Publishing**: Step-by-step guides available in [Store Publishing Guide](docs/deployment/store-publishing-guide.md).
 
 ---
 
@@ -325,17 +369,6 @@ cd npontu_sre_mobile
 flutter run -d chrome
 ```
 
-### 3. Installing Pre-Built Universal APK via ADB
-
-Pre-built Universal Release APKs are automatically generated on every commit by our GitHub Actions CI workflow:
-
-1. Download [`app-release.apk`](https://github.com/mhiskall282/npontu-technologies-sre/releases/latest/download/app-release.apk) from the latest release.
-2. Connect your physical Android phone (with USB Debugging enabled) or start your emulator.
-3. Install instantly via ADB:
-   ```bash
-   adb install -r app-release.apk
-   ```
-
 ---
 
 ## Legal, Privacy Policy & App Store Compliance
@@ -344,7 +377,7 @@ The platform and companion mobile apps comply with:
 - **Google Play User Data Policy**: Explicit disclosure of permissions, zero advertising SDKs, and transparent offline cache handling.
 - **Apple App Store Review Guideline 5.1.1(v)**: Full account deletion and data extraction request support.
 - **Ghana Data Protection Act 2012 (Act 843)** & **ISO 27001 / PCI-DSS v4.0**:
-  - Web Privacy Policy: Accessible at [`/privacy-policy`](https://npontu-support-tracker.onrender.com/privacy-policy).
+  - Web Privacy Policy: Accessible at [`/privacy-policy`](https://opsora-sre.onrender.com/privacy-policy).
   - In-App Mobile Privacy Sheet: Accessible via `Settings` &rarr; `Privacy Policy & Data Handling` or on `LoginScreen`.
   - Account Deletion Requests: Submit in-app via *Request Account Deletion* or email to Data Protection Officer at `dpo@npontu.com` (48hr acknowledgment, 30-day SLA).
   - Statutory 7-year cold-storage retention for immutable audit logs.
@@ -519,16 +552,20 @@ Controllers only handle HTTP glue: validate via Form Request → delegate to Act
 
 ---
 
-## Deployment (Render)
+## Deployment (Render Blueprint)
 
-This project ships a `render.yaml` Blueprint for one-click Render deployment.
+This project ships an Infrastructure-as-Code [render.yaml](render.yaml) Blueprint for automated cloud deployment:
 
-1. Log in to [Render](https://dashboard.render.com) and click **New → Blueprint**
-2. Connect your GitHub repo `mhiskall282/npontu-technologies-sre`
-3. Set the environment variable `APP_KEY` to the value from your local `.env`
-4. Click **Apply** — Render runs `build.sh` then migrates and serves the app
+1. Log in to [Render Dashboard](https://dashboard.render.com) and navigate to **Blueprints → New Blueprint Instance**.
+2. Connect your GitHub repository (`mhiskall282/opsora-saas`).
+3. Render automatically provisions the complete enterprise stack:
+   - **Opsora Web Service**: Dockerized Apache + PHP 8.2 runtime with OPcache and live health probe (`/up`).
+   - **Opsora Queue Worker**: Background processor for email notifications, alerts, and report generation.
+   - **Opsora Cron Scheduler**: Automated daily/weekly SLA digests and periodic telemetry polling.
+   - **Managed PostgreSQL Database**: High-availability relational database with SSL enforcement.
+4. Click **Apply** — Render automatically builds images, runs migrations, seeds core roles, and provisions SSL certificates.
 
-The Blueprint provisions a **1 GB persistent disk** at `/var/data` for the SQLite database file, ensuring data survives redeploys.
+For complete environment variable details, see [Environment Variables Reference](docs/deployment/environment-variables.md) and [Render Deployment Guide](docs/deployment/render.md).
 
 ---
 
@@ -602,6 +639,7 @@ Automated GitHub Actions pipelines ensure continuous code quality and release re
 | Document | Contents |
 |---|---|
 | [README.md](README.md) | Project overview, web & mobile setup, architecture, and verification commands |
+| [docs/deployment/environment-variables.md](docs/deployment/environment-variables.md) | Complete environment variable specification, Render cloud secrets, and SMTP/S3 setups |
 | [docs/deployment/render.md](docs/deployment/render.md) | Comprehensive 1-click blueprint guide for deploying Web, Workers, Cron, and PostgreSQL on Render |
 | [docs/deployment/vercel.md](docs/deployment/vercel.md) | Serverless PHP architecture guide, ephemeral storage bridge, and deployment guide for Vercel |
 | [docs/architecture/saas-control-plane-architecture.md](docs/architecture/saas-control-plane-architecture.md) | Enterprise SaaS control plane, tenant isolation, impersonation protocol, and Mermaid diagrams |
@@ -621,17 +659,34 @@ Automated GitHub Actions pipelines ensure continuous code quality and release re
 
 ---
 
-## Git Conventions
+## 🤝 Open Source & Contributing
 
-```
-feat:     New feature
-fix:      Bug fix
-docs:     Documentation only
-test:     Adding or fixing tests
-refactor: Code change without feature/fix
-chore:    Build, tooling, config changes
-style:    Formatting, no logic change
-```
+We welcome community contributions, bug reports, and feature proposals! Opsora SRE is built with the belief that mission-critical operations software should be accessible, robust, and community-driven.
+
+- 📖 **[Contributing Guide](CONTRIBUTING.md)**: Setup guides, coding standards, and PR workflows.
+- 📜 **[Code of Conduct](CODE_OF_CONDUCT.md)**: Community standards and inclusive communication expectations.
+- 🛡️ **[Security Policy](SECURITY.md)**: Vulnerability disclosure and security contacts.
+- 🐛 **[Issue Tracker](https://github.com/mhiskall282/opsora-saas/issues)**: Submit bug reports or feature ideas.
+- 💬 **[Discussions & Community](https://github.com/mhiskall282/opsora-saas/discussions)**: Ask questions, share ideas, and connect with other operations engineers.
+- 📦 **[Releases & Changelog](https://github.com/mhiskall282/opsora-saas/releases)**: Pre-built artifacts, mobile APKs, and release notes.
+
+### How to Help
+1. 🌟 **Star the repository** to boost visibility on GitHub.
+2. 🍴 **Fork the project** and submit pull requests for features or bug fixes.
+3. 🏷️ Look for issues tagged `good first issue` or `help wanted`.
+4. 📝 Improve documentation, tutorials, and runbooks.
+
+---
+
+## 📄 License
+
+Opsora SRE is open-sourced software licensed under the [MIT License](LICENSE).
+
+---
+
+## 🏷️ GitHub Search Keywords & Topics
+
+`site-reliability-engineering` • `sre` • `devops` • `shift-handover` • `on-call` • `incident-management` • `telemetry` • `system-health` • `uptime-monitoring` • `laravel-11` • `livewire-3` • `flutter` • `dart` • `mobile-app` • `multitenant-saas` • `compliance-audit` • `open-source` • `hacktoberfest` • `docker` • `postgresql` • `tailwind-css`
 
 ---
 

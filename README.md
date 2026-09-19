@@ -201,18 +201,20 @@ php artisan serve
 
 Open **[http://localhost:8000](http://localhost:8000)**
 
----
-## Seeded Test Credentials (Local Development)
+## Role-Based Access Governance
 
-| Role | Email | Password | Scope |
-|---|---|---|---|
-| **Administrator** | `admin@npontu.local` | `password` | Full user & activity management |
-| **Team Lead** | `lead@npontu.local` | `password` | Activity management & shift handover sign-off |
-| **Support Agent** | `agent@npontu.local` | `password` | Activity checkoffs & remark updates |
+Opsora SRE enforces role-based access control across three primary operational tiers:
 
-> ⚠️ **Change all passwords immediately in production environments.**
+| Role | System Scope | Key Capabilities |
+|---|---|---|
+| **Administrator** | `admin` | Full user provisioning, activity checklist management, tenant governance & SIEM audit logs |
+| **Team Lead** | `lead` | Shift supervision, activity management, incident flagging & two-way digital handover sign-offs |
+| **Support Agent** | `agent` | Routine activity checkoffs, mandatory resolution remarks & on-call shift operations |
 
----
+### Initial Account Provisioning
+- **Self-Service / Onboarding**: Register an initial administrator and organization via `/register`.
+- **Administrative Console**: Once logged in, administrators manage team members and permissions at `/admin/users`.
+- **CLI Provisioning**: Administrators can also be provisioned or promoted via Laravel Artisan (`php artisan tinker`).
 
 ## Running Tests
 
@@ -291,7 +293,7 @@ php artisan serve --host=0.0.0.0 --port=8000
 npm run dev
 
 # 3. Access in browser: http://localhost:8000
-# Log in with any pre-seeded persona: admin@npontu.local / lead@npontu.local / agent@npontu.local (password: password)
+# Sign in with your administrator or operator credentials created during setup / registration
 ```
 
 ### 2. Testing the Mobile App on PC (3 Options)
@@ -364,7 +366,7 @@ php artisan reports:send-automated weekly
 php artisan reports:send-automated monthly
 
 # Send report to a specific recipient address
-php artisan reports:send-automated daily --to=lead@npontu.local
+php artisan reports:send-automated daily --to=lead@your-organization.com
 ```
 
 ---

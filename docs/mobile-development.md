@@ -55,13 +55,17 @@ flutter run -d emulator-5554 \
 flutter run -d "iPhone 15 Pro" \
   --dart-define=API_BASE_URL=http://localhost:8000/api/v1
 ```
-### 2.2 Test Accounts (seeded by DatabaseSeeder)
+### 2.2 Mobile Operator Authentication
 
-| Role | Email | Password | Grade |
-|---|---|---|---|
-| Admin | `admin@npontu.local` | `password` | L4 Principal |
-| Shift Lead | `lead@npontu.local` | `password` | L3 Senior |
-| SRE Agent | `agent@npontu.local` | `password` | L1 Support |
+The mobile client authenticates against `POST /api/v1/auth/login` and receives a Bearer Sanctum token.
+
+| Role | Permissions & Views |
+|---|---|
+| **Admin** | Full activity management, cross-workspace switching, system telemetry HUD |
+| **Shift Lead** | Shift supervisor cockpit, activity creation, dual-signoff handover briefings |
+| **SRE Agent** | Personal shift board, routine checklist checkoffs, resolution remarks & offline sync |
+
+> Authenticate using any operator credentials registered via the web app or provisioned by your workspace administrator.
 
 ---
 

@@ -168,7 +168,7 @@
                     <span class="text-[10px] font-mono uppercase tracking-widest text-[#F5C518] font-bold">CHAPTER 01 &bull; ACCESS GOVERNANCE</span>
                     <h2 class="text-xl sm:text-2xl font-black text-white mt-0.5">Pre-Seeded Operational Test Personas</h2>
                 </div>
-                <span class="hidden sm:inline-block px-2.5 py-1 rounded-lg text-xs font-mono bg-white/5 border border-white/10 text-gray-400">3 Tiers &bull; Default Password: <code class="text-emerald-300">password</code></span>
+                <span class="hidden sm:inline-block px-2.5 py-1 rounded-lg text-xs font-mono bg-white/5 border border-white/10 text-gray-400">3 Tiers &bull; Salted Bcrypt &bull; MFA Ready</span>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -176,7 +176,7 @@
                 <div class="p-4 rounded-xl bg-[#0F1E14] border border-emerald-800/40 relative">
                     <div class="flex items-center justify-between">
                         <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-purple-950 text-purple-300 border border-purple-800/60 font-bold">L5 Principal Lead</span>
-                        <span class="text-xs font-mono text-emerald-300">hello@johnokyere.xyz</span>
+                        <span class="text-xs font-mono text-emerald-300">admin@your-org.com</span>
                     </div>
                     <h3 class="text-base font-black text-white mt-2">John Okyere</h3>
                     <p class="text-xs text-emerald-400 font-mono">Cloud Infrastructure &amp; Principal SRE</p>
@@ -193,7 +193,7 @@
                 <div class="p-4 rounded-xl bg-[#0F1E14] border border-emerald-800/40 relative">
                     <div class="flex items-center justify-between">
                         <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-950 text-emerald-300 border border-emerald-800/60 font-bold">L3 Shift Lead</span>
-                        <span class="text-xs font-mono text-emerald-300">abena.owusu@example.com</span>
+                        <span class="text-xs font-mono text-emerald-300">lead@your-org.com</span>
                     </div>
                     <h3 class="text-base font-black text-white mt-2">Abena Owusu</h3>
                     <p class="text-xs text-emerald-400 font-mono">Shift Supervisor &amp; Incident Commander</p>
@@ -210,7 +210,7 @@
                 <div class="p-4 rounded-xl bg-[#0F1E14] border border-emerald-800/40 relative">
                     <div class="flex items-center justify-between">
                         <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-blue-950 text-blue-300 border border-blue-800/60 font-bold">L1 Support Operator</span>
-                        <span class="text-xs font-mono text-emerald-300">kofi.asante@example.com</span>
+                        <span class="text-xs font-mono text-emerald-300">agent@your-org.com</span>
                     </div>
                     <h3 class="text-base font-black text-white mt-2">Kofi Asante</h3>
                     <p class="text-xs text-emerald-400 font-mono">Operations Engineer (NOC)</p>
@@ -387,9 +387,9 @@
                         <div>
                             <span class="text-gray-400 block mb-1.5">Request Body (JSON)</span>
                             <pre class="p-3.5 rounded-xl bg-black/60 border border-white/10 text-emerald-300 overflow-x-auto">{
-  "email": "hello@johnokyere.xyz",
-  "password": "password",
-  "device_name": "Mobile Pixel 8"
+  "email": "operator@your-org.com",
+  "password": "your-secure-password",
+  "device_name": "Mobile SRE Terminal"
 }</pre>
                         </div>
                         <div>

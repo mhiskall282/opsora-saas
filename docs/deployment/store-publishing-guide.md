@@ -113,10 +113,10 @@ The output bundle will be generated at:
    - **Free or paid**: Free
 2. **App Content Declarations**:
    - **Privacy Policy**: `https://npontu-support-tracker.onrender.com/privacy-policy`
-   - **App Access**: Select "All or some functionality is restricted". Add test login instructions:
-     - *Username*: `agent@npontu.local`
-     - *Password*: `password`
-     - *Instructions*: "Enterprise login credentials for SRE on-call demo and evaluator inspection."
+   - **App Access**: Select "All or some functionality is restricted". Provide credentials for a dedicated reviewer account provisioned from your workspace admin console:
+     - *Username*: `[Reviewer Account Email]`
+     - *Password*: `[Reviewer Secure Password]`
+     - *Instructions*: "Enterprise login credentials for SRE on-call mobile review and inspection."
    - **Ads**: Select "No, my app does not contain ads".
    - **Content Rating**: Complete the IARC questionnaire (Utility / Productivity app &rarr; Rating: Everyone / PEGI 3).
    - **Target Audience**: 18 and older (Enterprise work tool).
@@ -234,10 +234,10 @@ xcrun altool --upload-app --type ios \
      - *Identifiers*: User ID - linked to user.
 3. **App Review Information**:
    - **Sign-in Information**: Required
-   - **Username**: `agent@npontu.local`
-   - **Password**: `password`
+   - **Username**: `[Dedicated App Store Review Account Email]`
+   - **Password**: `[Dedicated App Store Review Account Password]`
    - **Notes for Reviewer**:
-     > "Npontu SRE Operations is an enterprise site reliability engineering monitoring tool. The test credentials grant access to active shift boards, two-way handover workflows, and system telemetry probes hosted at https://npontu-support-tracker.onrender.com."
+     > "Opsora SRE is an enterprise site reliability engineering monitoring tool. The review credentials grant access to active shift boards, two-way handover workflows, and system telemetry probes hosted at your deployed platform URL."
 4. **TestFlight Distribution**:
    - Under **TestFlight**, the uploaded build will process (5–15 minutes).
    - Add **Internal Testing Group** (leads and SRE engineers get instant access via TestFlight app).

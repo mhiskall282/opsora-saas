@@ -1,122 +1,85 @@
-# Environment Variables Reference Guide
+# Opsora SRE — Environment Variables & Cloud Configuration Guide
 
-This document catalogs every environment variable supported and utilized by the **Opsora (formerly Npontu) SRE Platform**, their purpose, requirements across environments, safe defaults, and security considerations.
-
----
-
-## 1. Application & Core Identity
-
-| Variable Name | Purpose | Required / Optional | Environment | Example Placeholder | Security Notes |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| `APP_NAME` | Display name of the SRE platform instance | Required | All | `"Opsora SRE"` | Publicly visible in email footers, page titles, and mobile clients. |
-| `APP_ENV` | Runtime environment mode | Required | All | `production` / `staging` / `local` | In `production`, triggers strict asset caching and hides debug output. |
-| `APP_KEY` | 32-character AES encryption key for sessions, cookies, and tokens | **Strictly Required** | All | `base64:4eU5u7...` | Generated via `php artisan key:generate`. **Never commit or expose.** |
-| `APP_DEBUG` | Enables detailed stack traces and debugging views | Required | Production: `false` | `false` | **MUST BE `false` in production** to prevent credential or environment leakage. |
-| `APP_URL` | Canonical root URL of the SRE web application | Required | All | `https://sre.opsora.io` | Used for generating absolute links in emails, webhooks, and Sanctum cookies. |
-| `APP_LOCALE` | Default UI localization code | Optional | All | `en` | Defaults to English. |
-| `APP_FALLBACK_LOCALE` | Fallback language code | Optional | All | `en` | Used if selected locale translation string is missing. |
+> **Audience:** DevOps Engineers, Platform Administrators  
+> **Applicable Hosts:** Render, Vercel, AWS ECS, Self-Hosted Docker
 
 ---
 
-## 2. Database Connectivity (MySQL 8.0+)
+## 1. Why You Did Not See Env Keys During Render Deployment
 
-| Variable Name | Purpose | Required / Optional | Environment | Example Placeholder | Security Notes |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| `DB_CONNECTION` | Database driver | Required | All | `mysql` | Platform requires MySQL 8.0+ for JSON operations and locking. (SQLite in tests). |
-| `DB_HOST` | Database server host or IP | Required | All | `127.0.0.1` or `db.internal.vpc` | Use private VPC endpoints in production clusters. |
-| `DB_PORT` | Database server listening port | Required | All | `3306` | Standard MySQL port. |
-| `DB_DATABASE` | Target database name | Required | All | `opsora_sre_prod` | Dedicated database instance with InnoDB storage engine. |
-| `DB_USERNAME` | Database user account | Required | All | `opsora_app` | Restrict database user privileges to DML operations (`SELECT`, `INSERT`, `UPDATE`, `DELETE`). |
-| `DB_PASSWORD` | Database user password | **Strictly Required** | All | `v3ry_Str0ng_P@ssw0rd!` | Store in cloud secrets manager (AWS Secrets Manager, Vault, etc.). |
+When deploying via **Render Blueprints** (`render.yaml`), Render automatically provisions and links infrastructure without requiring manual input:
 
----
+1. **Auto-Generated Cryptographic Keys**: `APP_KEY` is provisioned automatically with `generateValue: true` and normalized into a 32-byte AES-256 key on startup by `docker-entrypoint.sh`.
+2. **Managed Database Link**: `DATABASE_URL` is automatically wired from the managed PostgreSQL database instance (`opsora-db`) via `fromDatabase: connectionString`.
+3. **Pre-configured Production Presets**: `DB_CONNECTION=pgsql`, `SESSION_DRIVER=cookie`, `CACHE_STORE=database`, and `QUEUE_CONNECTION=database` are applied directly from `render.yaml`.
 
-## 3. Session & Authentication (Laravel Sanctum)
-
-| Variable Name | Purpose | Required / Optional | Environment | Example Placeholder | Security Notes |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| `SESSION_DRIVER` | Storage backend for web sessions | Required | Production: `database` or `redis` | `database` | Do not use `file` or `cookie` in multi-server horizontal clusters. |
-| `SESSION_LIFETIME` | Session duration in minutes | Required | All | `120` | Default 2 hours. Auto-invalidates inactive SRE operator sessions. |
-| `SESSION_ENCRYPT` | Encrypt session payloads on disk/DB | Optional | Production: `true` | `true` | Recommended `true` for enterprise compliance. |
-| `SANCTUM_STATEFUL_DOMAINS` | Domains permitted to exchange SPA session cookies | Required for SPA | Production | `sre.opsora.io,app.opsora.io` | Comma-delimited list of trusted subdomains. |
+Because all variables are pre-defined in the blueprint infrastructure code, Render starts the build immediately without displaying an interactive input questionnaire.
 
 ---
 
-## 4. Cache, Queues & Background Workers
+## 2. Where to View & Edit Environment Keys in Render
 
-| Variable Name | Purpose | Required / Optional | Environment | Example Placeholder | Security Notes |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| `CACHE_STORE` | Cache driver for metrics & rate limiting | Required | All | `database` or `redis` | Redis recommended for high-throughput production clusters. |
-| `QUEUE_CONNECTION` | Background job queue driver | Required | All | `database` or `redis` | Processed by `php artisan queue:work`. Never use `sync` in production. |
-| `REDIS_HOST` | Redis cache & queue host | Required if Redis | Staging / Prod | `10.0.2.15` | Keep behind VPC firewall. |
-| `REDIS_PASSWORD` | Redis authentication password | Required if Redis | Staging / Prod | `secr3t_auth_t0k3n` | Enforce AUTH on Redis instances. |
-| `REDIS_PORT` | Redis server port | Optional | Staging / Prod | `6379` | Standard Redis port. |
+You can view, edit, or add environment variables at any time in the **Render Dashboard**:
 
----
-
-## 5. Mail & Outbound Notifications
-
-| Variable Name | Purpose | Required / Optional | Environment | Example Placeholder | Security Notes |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| `MAIL_MAILER` | Mail driver (`smtp`, `ses`, `postmark`, `log`) | Required | All | `smtp` (or `log` in dev) | Use transactional email providers for incident alerting. |
-| `MAIL_HOST` | SMTP relay server | Required if SMTP | All | `smtp.postmarkapp.com` | Relayed over TLS port 587 or 465. |
-| `MAIL_PORT` | SMTP port | Required if SMTP | All | `587` | Use 587 (STARTTLS). |
-| `MAIL_USERNAME` | SMTP account username / API token | Required if SMTP | All | `postmark-api-token` | Store securely. |
-| `MAIL_PASSWORD` | SMTP account password | Required if SMTP | All | `postmark-api-key` | Store securely. |
-| `MAIL_ENCRYPTION` | Transport layer encryption | Required if SMTP | All | `tls` | Enforce TLS 1.2+. |
-| `MAIL_FROM_ADDRESS` | Sender email address | Required | All | `alerts@opsora.io` | Ensure SPF and DKIM DNS records match this sender. |
-| `MAIL_FROM_NAME` | Sender display name | Required | All | `"Opsora SRE Dispatch"` | Human-readable system name. |
+1. Log in to [dashboard.render.com](https://dashboard.render.com).
+2. Select your **`opsora-sre`** web service (or worker service).
+3. In the left-hand navigation menu, click **Environment**.
+4. Here you will see all active environment variables:
+   - Click **Add Environment Variable** to add custom keys (e.g., SMTP or AWS S3).
+   - Click the pencil icon or value box to update an existing variable.
+   - Click **Save Changes** &rarr; Render will automatically trigger a rolling zero-downtime redeploy with the updated keys.
 
 ---
 
-## 6. Storage & Object Storage
+## 3. Complete Environment Variables Inventory
 
-| Variable Name | Purpose | Required / Optional | Environment | Example Placeholder | Security Notes |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| `FILESYSTEM_DISK` | Storage disk for report exports and attachments | Required | All | `local` or `s3` | Use `s3` in multi-node container environments. |
-| `AWS_ACCESS_KEY_ID` | IAM access key for S3 bucket | Optional | If using S3 | `AKIAIOSFODNN7EXAMPLE` | Restrict IAM policy to target S3 bucket prefix. |
-| `AWS_SECRET_ACCESS_KEY` | IAM secret access key | Optional | If using S3 | `wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY` | Never commit. Rotate periodically. |
-| `AWS_DEFAULT_REGION` | AWS region hosting S3 storage | Optional | If using S3 | `af-south-1` or `eu-west-1` | Select region complying with data residency requirements. |
-| `AWS_BUCKET` | S3 bucket name | Optional | If using S3 | `opsora-sre-attachments` | Enforce SSE-S3 or SSE-KMS bucket encryption. |
-
----
-
-## 7. Logging & Observability
-
-| Variable Name | Purpose | Required / Optional | Environment | Example Placeholder | Security Notes |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| `LOG_CHANNEL` | Log destination (`stack`, `single`, `daily`, `stderr`, `syslog`) | Required | All | `stack` (or `stderr` for Docker) | Cloud-native deployments stream to `stderr`. |
-| `LOG_STACK` | Comma-separated channels in stack | Optional | All | `daily` | Rotates logs daily to avoid disk exhaustion. |
-| `LOG_LEVEL` | Minimum log severity to capture | Required | All | `info` (or `debug` in dev) | Avoid `debug` in production to prevent high volume and accidental data logging. |
+| Variable | Required? | Default / Example | Purpose & Notes |
+|---|---|---|---|
+| `APP_NAME` | Required | `"Opsora SRE"` | Platform name displayed on dashboards and notification emails |
+| `APP_ENV` | Required | `production` | Application environment (`production` disables debug tools) |
+| `APP_DEBUG` | Required | `false` | Must always be `false` in production to prevent stack traces |
+| `APP_KEY` | Required | `base64:...` | 32-byte AES-256 encryption key for session cookies & encrypted data |
+| `APP_URL` | Required | `https://opsora-sre.onrender.com` | Base URL used for email links and password reset tokens |
+| `LOG_CHANNEL` | Required | `stderr` (Docker) / `stack` (Local) | Docker/Render streams logs directly to container standard error |
+| `DB_CONNECTION` | Required | `pgsql` | Database driver (`pgsql` for PostgreSQL, `mysql` for MySQL) |
+| `DATABASE_URL` | Required (PG) | `postgres://user:pass@host:5432/db` | Connection string automatically injected by Render PostgreSQL |
+| `SESSION_DRIVER` | Required | `cookie` or `database` | Storage mechanism for user sessions |
+| `SESSION_LIFETIME` | Optional | `120` | Inactivity timeout in minutes before requiring sign-in re-authentication |
+| `CACHE_STORE` | Required | `database` | System health and rate-limiting cache backend |
+| `QUEUE_CONNECTION` | Required | `database` | Asynchronous queue driver for email dispatch and audit logs |
 
 ---
 
-## 8. Mobile Client Configuration (`npontu_sre_mobile`)
+## 4. Configuring Production Email Dispatch (SMTP / SES)
 
-The Flutter mobile application reads its backend configuration through Dart environment defines passed during build time or set in runtime configuration:
+By default, local environments use `MAIL_MAILER=log`. For live deployments to dispatch handover notices, incident alerts, and password reset links to real mailboxes, add these variables in your Render **Environment** tab:
 
-| Variable / Define | Purpose | Default | Example | Notes |
-| :--- | :--- | :--- | :--- | :--- |
-| `--dart-define=API_BASE_URL` | Root URL for REST API v1 endpoints | `http://10.0.2.2:8000/api/v1` | `https://sre.opsora.io/api/v1` | `10.0.2.2` maps to localhost inside Android emulator. |
-| `--dart-define=APP_ENV` | Mobile app environment mode | `development` | `production` | Enables release assertions and analytics flags. |
-| `--dart-define=ENABLE_BIOMETRICS` | Hardware biometric authentication toggle | `true` | `true` | Fallback PIN/passphrase enabled if hardware unavailable. |
-
----
-
-## 9. Verification & Health Check
-
-To verify your configuration in any deployed environment:
-
-```bash
-# Verify environment config and cache status
-php artisan about
-
-# Verify database connection and migrations
-php artisan migrate:status
-
-# Test queue worker connectivity
-php artisan queue:work --once
-
-# Test mail dispatch
-php artisan tinker --execute="Mail::raw('Opsora health probe', fn(\$m) => \$m->to('probe@example.com')->subject('Probe'));"
+### Option A: Standard Enterprise SMTP (Gmail / Google Workspace, SendGrid, etc.)
+```ini
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.sendgrid.net
+MAIL_PORT=587
+MAIL_USERNAME=apikey
+MAIL_PASSWORD=your_sendgrid_api_key
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=sre-alerts@your-company.com
+MAIL_FROM_NAME="Opsora SRE"
 ```
+
+### Option B: Amazon Simple Email Service (SES)
+```ini
+MAIL_MAILER=ses
+AWS_ACCESS_KEY_ID=your_aws_key
+AWS_SECRET_ACCESS_KEY=your_aws_secret
+AWS_DEFAULT_REGION=us-east-1
+MAIL_FROM_ADDRESS=sre-alerts@your-company.com
+MAIL_FROM_NAME="Opsora SRE"
+```
+
+---
+
+## 5. Synchronizing Variables Across Workers
+
+In `render.yaml`, the background queue worker (`opsora-sre-worker`) and scheduler (`opsora-sre-scheduler`) automatically inherit `APP_KEY` and `DATABASE_URL` from the main web service.
+
+If you add custom variables (such as `MAIL_*`) to the web service, be sure to also add them to the worker service if queue jobs handle background email dispatch.

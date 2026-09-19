@@ -84,9 +84,10 @@ The container entrypoint script (`docker-entrypoint.sh`) executes automatically 
 3. Runs `php artisan migrate --force`.
 4. Runs `php artisan db:seed --force` (populates default platform administrator and standard roles).
 
-### Accessing Default Administrator Credentials:
-- **Email**: `admin@npontu.com` (or platform admin defined in `database/seeders`)
-- **Password**: `password` (Must be immediately rotated upon first login via **Settings**)
+### Initial Administrator Provisioning:
+1. Navigate to your deployed application URL: `https://opsora-sre.onrender.com/register`
+2. Register your organization and initial administrator account.
+3. Access the platform control plane at `/admin/platform` or the SRE dashboard at `/dashboard`.
 
 ---
 
